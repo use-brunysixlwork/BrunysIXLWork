@@ -1,0 +1,173 @@
+<html>
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFZ72L5FPQ"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TFZ72L5FPQ');
+        </script>
+        <title>BrunysIXLWork | Settings</title>
+        <meta property="og:title" content="BrunysIXLWork | Settings">
+        <meta property="og:description" content="Configs for the website like tab cloaking, panic keys and more.">
+        <meta property="og:image" content="/assets/images/logo.png">
+        <meta property="og:image:width" content="100">
+        <meta property="og:image:height" content="100">
+        <meta property="og:url" content="https://ixl.brunys.site">
+        <meta name="theme-color" content="#0d0d0d">
+        <meta name="msapplication-TileColor" content="#0d0d0d">
+        <link rel="stylesheet" href="/assets/css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  </head>
+  <body>
+
+    <div id="loading-screen">
+      <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+      </div>
+      <p>Loading, please wait...</p>
+  </div>
+
+    <nav class="navbar">
+      <div class="left-side nav-links">
+        <a href="/"><i class="fa-solid fa-house"></i> HOME</a>
+        <a href="/gms.html"><i class="fa-solid fa-gamepad"></i> GAMES</a>
+        <a href="/aps.html"><i class="fa-solid fa-table-cells"></i> APPS</a>
+        <a href="/bmk.html"><i class="fa-solid fa-bookmark"></i> BOOKMARKLETS</a>
+      </div>
+  
+      <div class="right-side">
+        <button class="nav-btn" onclick="window.location.href='/settings.html'">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div style="padding-top: 75px;" class="my-container">
+
+      <div class="my-box">
+                  <h2>About:Blank</h2>
+                  <button class="button-home">Open About:Blank Cloaker</button>
+<script>
+
+  document.querySelector('.button-home').onclick = function () {
+    let currentURL = window.location.href; 
+    let win; 
+
+    
+    if (win) {
+      win.focus();
+    } else {
+      
+      win = window.open();
+      
+     
+      win.document.body.style.margin = '0';
+      win.document.body.style.height = '100vh';
+
+      
+      let iframe = win.document.createElement('iframe');
+      iframe.style.border = 'none';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.margin = '0';
+
+      
+      iframe.src = currentURL;
+
+    
+      win.document.body.appendChild(iframe);
+
+   
+      setTimeout(() => {
+        window.location.replace("https://ixl.com");
+      }, 500); 
+
+     
+      let interval = setInterval(() => {
+        if (win.closed) {
+          clearInterval(interval);
+          win = undefined; 
+        }
+      }, 500);
+    }
+  };
+</script>
+
+
+      </div>
+
+      <div class="my-box">
+
+          <h2>Tab Cloaking</h2>
+          <select class="button-home" id="presetSelect">
+              <option value="ixl">ixl</option>
+              <option value="s">schoology</option>
+              <option value="google">google</option>
+              <option value="classroom">google classroom</option>
+              <option value="googledrive">google drive</option>
+              <option value="chrometab">chrome new tab</option>
+              <option value="gmail">gmail</option>
+              <option value="bing">bing</option>
+              <option value="desmos">desmos calculator</option>
+              <option value="wikipedia">wikipedia</option>
+          </select>
+      
+          <button class="button-home" id="saveButton">select cloak</button>
+          <button class="button-home" id="resetButton">reset cloak</button>
+          <p id="success" style="display: none;">success message here</p>
+
+      </div>
+
+      <div class="my-box">
+          <h2>Custom Tab Cloak</h2>
+          
+          <input class="button-home" type="text" id="websiteTitle" class="entertext1" placeholder="Enter Custom Title">
+          
+          <input class="button-home" type="text" id="faviconUrl" class="entertext2" placeholder="Enter Custom Image URL">
+
+          <button class="button-home" onclick="setCustomSettings()">Save Changes</button>
+
+          <button class="button-home" onclick="resetSettings()">Reset to Default</button>
+
+      </div>
+
+      <div class="my-box">
+
+          <h2>Panic Key</h2>
+          <input class="button-home" type="text" id="panicKey" placeholder="choose a key combination" readonly>
+          <input class="button-home" type="url" id="panicUrl" placeholder="https://www.desmos.com/scientific">
+          <button class="button-home" onclick="saveSettings()">set panic key</button>
+          <p id="success-panic" style="display: none;">success message here</p>
+
+      </div>
+
+      <div class="my-box">
+          <h2>Anti Close</h2>
+          <label>
+              Enable Or Disable
+              <input type="checkbox" id="toggleConfirmation">
+          </label>
+      </div>
+  </div>
+
+  <br>
+
+<br>
+<br>
+<br>
+
+    <script src="/assets/js/loadingscreen.js"></script>
+    <script src="/assets/js/bannerscroll.js"></script>
+    <script src="/assets/js/settings/anticlose.js"></script>
+    <script src="/assets/js/settings/cloak.js"></script>
+    <script src="/assets/js/settings/customcloak.js"></script>
+    <script src="/assets/js/settings/data.js"></script>
+    <script src="/assets/js/settings/settings.js"></script>
+  </body>
+</html>
+

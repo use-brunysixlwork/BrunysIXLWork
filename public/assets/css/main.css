@@ -563,6 +563,8 @@ a {
     color: inherit; 
     font-size: 16px;
     transition: width 0.3s ease; 
+	font-family: "League Spartan", serif;
+    
 }
 
 .form__input:focus {
@@ -580,7 +582,7 @@ a {
 
 .images-row {
 	display: flex;
-	gap: 10px;
+	gap: 20px;
 	flex-wrap: wrap;
 	justify-content: center;
 }
@@ -590,9 +592,16 @@ a {
 }
 
 .images-row img {
-	width: 30px;
-	height: 30px;
+	width: 50px;
+	height: 50px;
 	transition: transform 0.3s ease;
+	border-radius: 50px;
+	
+}
+
+.images-row p {
+	color: white;
+	font-size: 12px;
 }
 
 .images-row img:hover {

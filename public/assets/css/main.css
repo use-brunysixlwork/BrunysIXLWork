@@ -148,7 +148,7 @@ body {
 
 .image-item {
 	position: relative;
-	width: 200px;
+	width: 190px;
 	height: 190px;
 	overflow: hidden;
 	transition: transform 0.3s;
@@ -600,6 +600,19 @@ a {
 }
 
 * {
-	scrollbar-width: thin;
-	scrollbar-color: #fff transparent;
+    scrollbar-width: thin;
+    scrollbar-color: #fff transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 10px;
 }

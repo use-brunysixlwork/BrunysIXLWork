@@ -554,6 +554,21 @@ a {
     border-radius: 50px; 
 }
 
+.form__input {
+    width: 500px;
+    padding: 20px 20px; 
+    border: none;
+    border-radius: 50px;
+    background-color: #141414;
+    color: inherit; 
+    font-size: 16px;
+    transition: width 0.3s ease; 
+}
+
+  .form__input:focus {
+    width: 600px; 
+}
+
 * {
 	scrollbar-width: thin;
 	scrollbar-color: #fff transparent;

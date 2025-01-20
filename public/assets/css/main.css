@@ -569,6 +569,36 @@ a {
     width: 600px; 
 }
 
+.search-bar img {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 20px;
+	height: 20px;
+}
+
+.images-row {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.images-row a {
+	display: block;
+}
+
+.images-row img {
+	width: 30px;
+	height: 30px;
+	transition: transform 0.3s ease;
+}
+
+.images-row img:hover {
+	transform: scale(1.1);
+}
+
 * {
 	scrollbar-width: thin;
 	scrollbar-color: #fff transparent;

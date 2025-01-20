@@ -565,7 +565,7 @@ a {
     transition: width 0.3s ease; 
 }
 
-  .form__input:focus {
+.form__input:focus {
     width: 600px; 
 }
 

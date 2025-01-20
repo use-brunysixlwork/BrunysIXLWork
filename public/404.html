@@ -35,10 +35,16 @@
     <section class="banner">
       <h1><span class="fade">404!1!!!!</span></h1>
       
-      <p>This page does not exist or is not avalible at the momment!</p>
+      <p>This page does not exist or is not avalible at the momment! If you are here because of the proxy click the register service worker button below.</p>
 
       <div class="container-buttons">
       <a href="/" class="button-home">RETURN HOME</a>
+      <button onclick="refreshPage()">REGISTER SERVICE WORKER</button>
+      <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
     </div>
 
 

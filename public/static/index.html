@@ -23,19 +23,14 @@
 </head>
 
 <body>
-    <div class="tab-bar">
-        <span><a href="/"><h3><img src="/assets/images/logo.png" alt="Image" class="left-image">BRUNYSIXLWORK</h3></a></span>
-        <div class="buttons">
-            <button onclick="goBack()"><i class="fa fa-arrow-left"></i></button>
-            <button onclick="goForward()"><i class="fa fa-arrow-right"></i></button>
-            <button onclick="reloadIframe()"><i class="fa fa-refresh"></i></button>
-            <button style="margin-right: 10px;" onclick="toggleFullscreen()"><i class="fa fa-expand"></i></button>
-        </div>
+    <div class="overlay-buttons">
+        <button onclick="goFullscreen()"><i class="fas fa-expand"></i></button>
+        <button onclick="refreshIframe()"><i class="fas fa-sync-alt"></i></button>
+        <button onclick="goForward()"><i class="fas fa-arrow-alt-circle-right"></i></button>
+        <button onclick="goBack()"><i class="fas fa-arrow-alt-circle-left"></i></button>
     </div>
-
-    <div class="iframe-container">
-        <iframe id="proxyIframe" src="" allow="fullscreen"></iframe>
-    </div>
+    
+    <iframe src="" id="proxyIframe"></iframe>
 
     <script src="/static/launcher.js"></script>
     <script src="/assets/js/bannerscroll.js"></script>

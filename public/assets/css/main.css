@@ -266,7 +266,45 @@ body {
 	pointer-events: none;
 }
 
+iframe {
+	width: 75vw;
+	height: 75vh;
+	border: none;
+	margin: 0 auto;
+	display: flex;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+  }
 
+  .controls {
+	margin: 0 auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 75vw;
+	gap: 10px;
+	background-color: #141414;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+  }
+
+  .controls button {
+	padding: 10px;
+	font-size: 16px;
+	background-color: transparent;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: color 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+
+  .controls button:hover {
+	color: #ccc;
+  }
 
 .image-link {
 	display: inline-block;

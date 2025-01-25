@@ -452,40 +452,13 @@ a {
 	text-decoration: none;
 }
 
-.button-box {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 25vw;
-	height: 62vh;
-	background-color: #141414;
-	border: none;
-	padding: 15px;
-	border-radius: 15px;
-	z-index: 1;
-	position: relative;
-}
-
 .con {
 	display: flex;
-	justify-content: flex-end;
 	margin: 0;
 }
 
-.con2 {
-	position: absolute;
-	top: 80vh;
-	right: 8vw;
-	width: 150px;
-	z-index: 10;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	margin-top: 10px;
-	margin-right: 5vw;
-}
-
 .image-bundle {
+	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 10px;

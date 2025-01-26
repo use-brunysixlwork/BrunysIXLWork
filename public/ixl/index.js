@@ -34,7 +34,7 @@ form.addEventListener("submit", async (event) => {
   const url = search(address.value, searchEngine.value);
   const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(url);
   localStorage.setItem("url", `${encodeURIComponent(encodedUrl)}`);
-  window.location.href = `/static/`;
+  window.location.href = `/ixl/`;
 });
 
 async function launchURL(openURL) {
@@ -62,5 +62,5 @@ async function launchGame(openURL) {
   const url = search(openURL, searchEngine.value);
   const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(url);
   localStorage.setItem('storedURL', encodedUrl);
-  window.location.href = "/static/";
+  window.location.href = "/ixl/";
 }

@@ -329,10 +329,11 @@ iframe {
 }
 
 .controls {
+	margin-left: 3vh;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	width: 72vw;
+	width: 70vw;
 	gap: 5px;
 	background-color: #141414;
 	border-bottom-left-radius: 15px;

@@ -321,7 +321,7 @@ body {
 
 iframe {
 	margin-left: 3vh;
-	width: 70vw;
+	width: 71vw;
 	height: 75vh;
 	border: none;
 	border-top-left-radius: 15px;
@@ -360,7 +360,7 @@ iframe {
 .ad-box-iframe {
 	margin-right: 4vw;
 	width: 20vw;
-	height: 70vh;
+	height: 75vh;
 	background-color: #141414;
 	position: absolute; 
 	right: 0; 

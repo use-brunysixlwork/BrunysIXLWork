@@ -320,7 +320,8 @@ body {
 }
 
 iframe {
-	width: 75vw;
+	margin-left: 3vh;
+	width: 70vw;
 	height: 75vh;
 	border: none;
 	border-top-left-radius: 15px;

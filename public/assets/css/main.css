@@ -332,7 +332,7 @@ iframe {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	width: 68vw;
+	width: 70vw;
 	gap: 5px;
 	background-color: #141414;
 	border-bottom-left-radius: 15px;
@@ -358,7 +358,7 @@ iframe {
 }
 
 .ad-box-iframe {
-	margin-right: 3vw;
+	margin-right: 5vw;
 	width: 20vw;
 	height: 70vh;
 	background-color: #141414;

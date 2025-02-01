@@ -321,7 +321,7 @@ body {
 
 iframe {
 	margin-left: 3vh;
-	width: 71vw;
+	width: 70vw;
 	height: 75vh;
 	border: none;
 	border-top-left-radius: 15px;
@@ -332,7 +332,7 @@ iframe {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	width: 70vw;
+	width: 71vw;
 	gap: 5px;
 	background-color: #141414;
 	border-bottom-left-radius: 15px;

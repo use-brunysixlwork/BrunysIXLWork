@@ -320,6 +320,7 @@ iframe {
 	border: none;
 	margin: 0 auto;
 	display: flex;
+	float: left;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 }
@@ -327,7 +328,8 @@ iframe {
 .controls {
 	margin: 0 auto;
 	display: flex;
-	justify-content: flex-end; /* Change from flex-start to flex-end */
+	justify-content: flex-end; 
+	float: left;
 	align-items: center;
 	width: 75vw;
 	gap: 5px;

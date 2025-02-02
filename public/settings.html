@@ -153,6 +153,17 @@
               <input type="checkbox" id="toggleConfirmation">
           </label>
       </div>
+
+      <div class="my-box">
+        <h2>Proxy Search Enigne</h2>
+        <select class="button-home" id="search-engine-selector" class="form__input">
+          <option value="https://www.google.com/search?q=%s">Google</option>
+          <option value="https://www.duckduckgo.com/?q=%s" selected>DuckDuckGo</option>
+          <option value="https://www.bing.com/search?q=%s">Bing</option>
+          <option value="https://search.brave.com/search?q=%s">Brave</option>
+      </select>
+      </div>
+
   </div>
 
   <div class="ad-container">
@@ -175,6 +186,8 @@
 <br>
 
     <script src="/assets/js/loadingscreen.js"></script>
+    <script src="/assets/js/proxy/proxyindex.js"></script>
+    <script src="/assets/js/proxy/proxysetting.js"></script> 
     <script src="/assets/js/bannerscroll.js"></script>
     <script src="/assets/js/settings/anticlose.js"></script>
     <script src="/assets/js/settings/cloak.js"></script>

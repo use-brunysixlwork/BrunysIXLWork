@@ -320,7 +320,7 @@ body {
 }
 
 iframe {
-	margin-left: 3vh;
+	margin-left: 5vh;
 	width: 70vw;
 	height: 75vh;
 	border: none;
@@ -329,7 +329,7 @@ iframe {
 }
 
 .controls {
-	margin-left: 3vh;
+	margin-left: 5vh;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -359,7 +359,7 @@ iframe {
 }
 
 .ad-box-iframe {
-	margin-right: 4vw;
+	margin-right: 3.5vw;
 	width: 20vw;
 	height: 75vh;
 	background-color: #141414;

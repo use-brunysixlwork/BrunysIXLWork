@@ -32,7 +32,7 @@ app.use((req, res) => {
   res.redirect("/404");
 });
 
-const bareServer = createBareServer("/bare/");
+const bareServer = createBareServer("/b/");
 const server = http.createServer((req, res) => {
   if (bareServer.shouldRoute(req)) {
     bareServer.routeRequest(req, res);

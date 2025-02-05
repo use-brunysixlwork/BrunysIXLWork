@@ -375,6 +375,7 @@ iframe {
 
 
 .ad-box-iframe iframe {
+	margin-right: 2.5vw;
 	width: 160px !important;
 	height: 300px !important;
 	border: none;

@@ -649,3 +649,8 @@ a {
     background-color: #fff;
     border-radius: 10px;
 }
+
+::selection {
+	background-color: #fff;
+	color: #0d0d0d;
+}

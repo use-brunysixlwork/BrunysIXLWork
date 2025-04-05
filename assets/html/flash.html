@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Flash Index Loader</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: black;
+            }
+
+            #loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-family: Arial, sans-serif;
+                font-size: 18px;
+                z-index: 9999;
+            }
+
+            .loader {
+                width: 50px;
+                height: 50px;
+                border: 5px solid white;
+                border-top: 5px solid transparent;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-bottom: 10px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            #ruffle {
+                width: 100vw;
+                height: 100vh;
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loading-screen">
+            <div class="loader"></div>
+            <p>Loading Flash content...</p>
+        </div>
+
+        <div id="ruffle"></div>
+
+        <script>
+            function loadLocalRuffle() {
+                var script = document.createElement('script');
+                script.src = '../../storage/ruffle/ruffle.js';
+                document.body.appendChild(script);
+            }
+
+            var cdnScript = document.createElement('script');
+            cdnScript.src = 'https://unpkg.com/@ruffle-rs/ruffle';
+            cdnScript.onerror = loadLocalRuffle;
+            document.body.appendChild(cdnScript);
+
+            function getSWFFile() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('url');
+            }
+
+            let player; 
+            window.RufflePlayer = window.RufflePlayer || {};
+
+            window.addEventListener("load", () => {
+                let swfFile = getSWFFile();
+                let savedSWF = localStorage.getItem("swfFile");
+                let lastFrame = localStorage.getItem("swfFrame");
+
+             
+                if (!swfFile && savedSWF) {
+                    swfFile = savedSWF;
+                }
+
+                if (swfFile) {
+                    const ruffle = window.RufflePlayer.newest();
+                    player = ruffle.createPlayer();
+                    const container = document.getElementById("ruffle");
+                    player.id = "player";
+                    player.style.width = "100%";
+                    player.style.height = "100%";
+                    container.appendChild(player);
+
+                  
+                    player.load(swfFile).then(() => {
+            
+                        document.getElementById("loading-screen").style.display = "none";
+                        document.getElementById("ruffle").style.visibility = "visible";
+
+               
+                        if (lastFrame) {
+                            setTimeout(() => {
+                                player.set_frame(parseInt(lastFrame)); 
+                            }, 500);
+                        }
+
+                
+                        localStorage.setItem("swfFile", swfFile);
+
+                      
+                        setInterval(() => {
+                            if (player.get_frame) {
+                                localStorage.setItem("swfFrame", player.get_frame());
+                            }
+                        }, 2000);
+                    });
+                } else {
+                    console.warn("No SWF file specified in URL.");
+                    document.getElementById("loading-screen").innerHTML = "<p>No Flash file provided.</p>";
+                }
+            });
+        </script>
+    </body>
+</html>

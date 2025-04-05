@@ -35,38 +35,27 @@
       </ul>
   </nav>
      
-  <input style="margin-top: 100px;" type="text" id="searchBar" placeholder="Search Apps..." onkeyup="filterButtons()">
-
-<div class="ad-container">
-
-  <script type="text/javascript">
-	atOptions = {
-		'key' : 'caa922f2f2ecd81beba3c1e9361541f8',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/caa922f2f2ecd81beba3c1e9361541f8/invoke.js"></script>
-  
-  </div>
-
-  <div class="button-container" id="buttonContainer">
-    
-
-<button class="filter-button" onclick="window.location.href='/iframe.html?url=/apps/ruffle/'">Ruffle</button>
-<button class="filter-button" onclick="window.location.href='/iframe.html?url=/games3/30dollarwebsite/'">30 Dollar Website</button>
-<button class="filter-button" onclick="window.location.href='/iframe.html?url=/games3/vmlinux/'">VMLinux</button>
-<button class="filter-button" onclick="window.location.href='/iframe.html?url=/games4/html5/webretro/'">Web Retro</button>
-
-</div>
+  <input style="margin-top: 100px;" type="text" id="searchBar" placeholder="Search games..." oninput="filterGames()">
+  <div class="ad-container">
+    <script type="text/javascript">
+    atOptions = {
+      'key' : 'caa922f2f2ecd81beba3c1e9361541f8',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/caa922f2f2ecd81beba3c1e9361541f8/invoke.js"></script>
+    </div>
+  <div id="games-container"></div>
 
  
      <br>
      <br>
  
     <script src="/assets/js/games/apps.js"></script>
+    <script src="/assets/js/games/loadapps.js"></script>
     <script src="/assets/js/games/iframe.js"></script>
     <script src="/assets/js/loadingscreen.js"></script>
     <script src="/assets/js/boxsearch.js"></script>

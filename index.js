@@ -17,7 +17,7 @@ const routes = [
   { path: "/", file: "index.html" },
   { path: "/g", file: "gms.html" },
   { path: "/a", file: "aps.html" },
-  { path: "/s", file: "settings.html" },
+  { path: "/s", file: "set.html" },
 ];
 
 routes.forEach((route) => {

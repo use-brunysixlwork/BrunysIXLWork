@@ -18,8 +18,6 @@ const routes = [
   { path: "/g", file: "gms.html" },
   { path: "/a", file: "aps.html" },
   { path: "/s", file: "settings.html" },
-  { path: "/p", file: "proxy.html" },
-  { path: "/404", file: "404.html" },
 ];
 
 routes.forEach((route) => {

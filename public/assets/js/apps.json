@@ -1,0 +1,89 @@
+{
+    "games": [
+
+      {
+        "name": "30 Dollar Website",
+        "url": "/iframe.html?url=/assets/apps/thirtydollarwebsite/",
+        "image": "/assets/images/apps/30dollarwebsite.png"
+      },
+
+      {
+        "name": "Ruffle",
+        "url": "/iframe.html?url=/assets/apps/ruffle/",
+        "image": "/assets/images/apps/ruffle.png"
+      },
+
+      {
+        "name": "Godoblocks",
+        "url": "/iframe.html?url=/assets/apps/godoblocks/",
+        "image": "/assets/images/apps/godoblocks.png"
+      },
+
+      {
+        "name": "v86",
+        "url": "/iframe.html?url=/assets/apps/v86/",
+        "image": "/assets/images/apps/v86.png"
+      },
+
+      {
+        "name": "Emulator JS",
+        "url": "/iframe.html?url=/assets/apps/emulatorjs/",
+        "image": "/assets/images/apps/emulatorjs.png"
+      },
+
+      {
+        "name": "Calculator",
+        "url": "/iframe.html?url=/assets/apps/calculator/",
+        "image": "/assets/images/apps/calc.png"
+      },
+
+      {
+        "name": "Fluid Simulator",
+        "url": "/iframe.html?url=/assets/apps/fluidsim/",
+        "image": "/assets/images/apps/webglfluid.png"
+      },
+
+      {
+        "name": "Windows 11",
+        "url": "/iframe.html?url=/assets/apps/windows11/",
+        "image": "/assets/images/apps/win11.png"
+      },
+
+      {
+        "name": "Etch A Sketch",
+        "url": "/iframe.html?url=/assets/apps/etchasketch/",
+        "image": "/assets/images/apps/eas.jpg"
+      },
+
+      {
+        "name": "Turbowarp",
+        "url": "/iframe.html?url=/assets/apps/turbowarp/",
+        "image": "/assets/images/apps/turbowarp.png"
+      },
+
+      {
+        "name": "Turbowarp Packager",
+        "url": "/iframe.html?url=/assets/apps/turbowarppkg/",
+        "image": "/assets/images/apps/turbowarp.png"
+      },
+
+      {
+        "name": "Turbowarp Unpackager",
+        "url": "/iframe.html?url=/assets/apps/turbowarpunpkg/",
+        "image": "/assets/images/apps/turbowarp.png"
+      },
+
+      {
+        "name": "Weave Silk",
+        "url": "/iframe.html?url=/assets/apps/weavesilk/",
+        "image": "/assets/images/apps/weavesilk.png"
+      },
+      
+      {
+        "name": "Zip Opener",
+        "url": "/iframe.html?url=/assets/apps/zipop",
+        "image": "/assets/images/games/zip.jpg"
+      }
+
+    ]
+}

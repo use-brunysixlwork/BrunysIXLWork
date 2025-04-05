@@ -26,9 +26,7 @@ routes.forEach((route) => {
   });
 });
 
-app.use((req, res) => {
-  res.redirect("/404");
-});
+
 
 const bareServer = createBareServer("/b/");
 const server = http.createServer((req, res) => {

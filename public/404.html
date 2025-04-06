@@ -41,12 +41,12 @@
             margin-top: 20px;
         }
 
-        a {
+        button {
             display: inline-block;
             margin-top: 30px;
             padding: 15px 30px;
             border: 2px solid #141414;
-	        background-color: rgba(0, 0, 0, 0.5);
+	    background-color: rgba(0, 0, 0, 0.5);
             color: #fff;
             text-decoration: none;
             font-weight: bold;
@@ -54,7 +54,7 @@
             transition: background-color 0.3s ease;
         }
 
-        a:hover {
+        button:hover {
             background-color: #ccc;
         }
     </style>
@@ -63,10 +63,16 @@
 <body>
     <div id="particles-js"></div>
     <div class="container">
-        <h1>404</h1>
-        <p>Oops! The page you're looking for doesn't exist.</p>
-        <a href="/">Go Back Home</a>
+        <h1>Ultraviolet | Error</h1>
+        <p>Please Register Service Worker By Pressing The Buttton Below</p>
+        <button onclick="location.reload();">Click Here To FIX!</button>
+        <p>or just refresh the page.</p>
     </div>
+  <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="/assets/js/p.js"></script>
     <script type='text/javascript' src='//pl26227510.effectiveratecpm.com/d4/76/90/d47690bb9eaeb40aab800889d7b21a53.js'></script>

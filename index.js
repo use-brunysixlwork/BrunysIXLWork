@@ -18,6 +18,8 @@ const routes = [
   { path: "/g", file: "gms.html" },
   { path: "/a", file: "aps.html" },
   { path: "/s", file: "set.html" },
+  { path: "/x", file: "iframe.html" },
+  { path: "/404", file: "404.html" },
 ];
 
 routes.forEach((route) => {
@@ -26,7 +28,9 @@ routes.forEach((route) => {
   });
 });
 
-
+app.use((req, res) => {
+  res.redirect("/404");
+});
 
 const bareServer = createBareServer("/b/");
 const server = http.createServer((req, res) => {

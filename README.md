@@ -1,7 +1,6 @@
 
 # BrunysIXLWork
-## A website meant for places that have restrictions on having fun.
-BrunysIXLWork is a unblocked games site with over 350+ games and a proxy unblocker. We also have some apps and settings too.
+## A website meant for places that have restrictions on having fun. BrunysIXLWork is a unblocked games site with over 350+ games and a proxy unblocker. We also have some apps and settings too.
 
 # Why BrunysIXLWork?
 ## BrunysIXLWork exists for you to have some fun in places such as school and work as they usually have restrictions

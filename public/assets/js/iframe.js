@@ -1,5 +1,18 @@
 const iframe = document.getElementById('gameframe');
 
+
+const popupTriggers = [
+    {
+        match: '/assets/games/eagler112.html',
+        message: 'JOIN THE BRUNYCRAFT SERVER BY PUTTING IN <strong>eplay.brunycraft.xyz</strong>!'
+    },
+    {
+        match: '/assets/games/eagler.html',
+        message: 'JOIN THE BRUNYCRAFT SERVER BY PUTTING IN <strong>eplay.brunycraft.xyz</strong>!'
+    }
+];
+
+
 function getQueryParam(param) {
     return new URLSearchParams(window.location.search).get(param);
 }
@@ -36,10 +49,9 @@ function activateChat() {
     });
 }
 
-
-function showBrunycraftPopup() {
+function showPopup(message) {
     const popup = document.createElement('div');
-    popup.id = 'brunycraft-popup';
+    popup.id = 'custom-popup';
     popup.style.position = 'fixed';
     popup.style.top = '30%';
     popup.style.left = '50%';
@@ -52,16 +64,22 @@ function showBrunycraftPopup() {
     popup.style.zIndex = '9999';
     popup.style.textAlign = 'center';
     popup.innerHTML = `
-        <p style="margin-bottom: 10px;">JOIN THE BRUNYCRAFT SERVER BY PUTTING IN <strong>eplay.brunycraft.xyz</strong>!</p>
+        <p style="margin-bottom: 10px;">${message}</p>
         <button id="close-popup" style="padding: 5px 10px; background: #444; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
     `;
 
     document.body.appendChild(popup);
+    document.getElementById('close-popup').addEventListener('click', () => popup.remove());
+}
 
-    document.getElementById('close-popup').addEventListener('click', () => {
-        popup.remove();
+function checkForPopup(url) {
+    popupTriggers.forEach(trigger => {
+        if (url.includes(trigger.match)) {
+            showPopup(trigger.message);
+        }
     });
 }
+
 
 const urlParam = getQueryParam('url');
 const savedUrl = localStorage.getItem('iframeUrl');
@@ -72,18 +90,13 @@ if (urlParam) {
     localStorage.setItem('iframeUrl', decodedUrl); 
     history.replaceState(null, '', window.location.pathname);
     console.log('Iframe URL set from query param:', decodedUrl);
-
-    if (decodedUrl.includes('/assets/games/eagler112.html')) {
-        showBrunycraftPopup();
-    }
+    checkForPopup(decodedUrl);
 } else if (savedUrl) {
     iframe.src = savedUrl; 
     console.log('Iframe URL set from localStorage:', savedUrl);
-
-    if (savedUrl.includes('/assets/games/eagler112.html')) {
-        showBrunycraftPopup();
-    }
+    checkForPopup(savedUrl);
 } else {
     iframe.src = 'https://example.com'; 
     console.log('Iframe URL set to default:', iframe.src);
 }
+

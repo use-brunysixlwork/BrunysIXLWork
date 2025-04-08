@@ -41,6 +41,11 @@
       "image": "/assets/images/games/polytrack.jpeg"
     },
     {
+      "name": "Bitlife",
+      "url": "/x?url=/assets/games/bitlife/",
+      "image": "/assets/images/games/bitlife.png"
+    },
+    {
       "name": "3D Tanks",
       "url": "/x?url=/assets/html/flash.html?url=/assets/flash/3dtanks.swf",
       "image": "/assets/images/games/3dtanks.jpg"

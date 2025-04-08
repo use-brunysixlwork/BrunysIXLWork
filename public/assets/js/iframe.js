@@ -80,6 +80,13 @@ function checkForPopup(url) {
     });
 }
 
+function goBack() {
+    if (previousURL) {
+        window.location.href = previousURL;
+    } else {
+        window.history.back();
+    }
+}
 
 const urlParam = getQueryParam('url');
 const savedUrl = localStorage.getItem('iframeUrl');
@@ -98,13 +105,5 @@ if (urlParam) {
 } else {
     iframe.src = 'https://example.com'; 
     console.log('Iframe URL set to default:', iframe.src);
-}
-
-function goBack() {
-    if (previousURL) {
-        window.location.href = previousURL;
-    } else {
-        window.history.back();
-    }
 }
 

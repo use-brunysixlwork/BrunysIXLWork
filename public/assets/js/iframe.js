@@ -100,3 +100,11 @@ if (urlParam) {
     console.log('Iframe URL set to default:', iframe.src);
 }
 
+function goBack() {
+    if (previousURL) {
+        window.location.href = previousURL;
+    } else {
+        window.history.back();
+    }
+}
+

@@ -1824,6 +1824,11 @@
       "name": "Max Design Pro Maze",
       "url": "/x?url=/assets/games/maxdesignpromaze/",
       "image": "/assets/images/games/maxdesignpromaze.jpg"
+    },
+    {
+      "name": "Nazi Zombies Portable",
+      "url": "/x?url=/assets/games/nzp/",
+      "image": "/assets/images/games/nazi.jpg"
     }
   ]
 }

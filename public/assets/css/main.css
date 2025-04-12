@@ -13,6 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend&family=Lato&display=swap');
 
 
 :root {
@@ -224,6 +225,20 @@
     --scroll-track: #4b2d0a;
     --highlight-bg: #7d4d2c;
     --highlight-text: #ffffff;
+}
+
+.theme-jimmy {
+    --bg-color: #000;
+    --font: "Lato", sans-serif;
+    --text-color: #FFD700; 
+    --border-color: #141414;
+    --input-bg: rgba(0,0,0,0.5);
+    --hover-color: #ccc;
+    --box-bg: rgba(0,0,0,0.5);
+    --scroll-thumb: #FFD700; 
+    --scroll-track: transparent;
+    --highlight-bg: #FFD700; 
+    --highlight-text: #0d0d0d;
 }
 
 #particles-js {

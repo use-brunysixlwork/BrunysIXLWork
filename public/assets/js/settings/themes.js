@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     selector.addEventListener("change", () => {
     
-        document.body.classList.remove("theme-light", "theme-blue");
+        document.body.classList.remove("theme-light", "theme-blue", "theme-hacker");
 
         const selected = selector.value;
 

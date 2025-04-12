@@ -14,7 +14,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&family=Lato&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 
 :root {
@@ -244,7 +244,7 @@
 
 .theme-rainbow {
     --bg-color: linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet);
-    --font: "Lexend", "Lato", sans-serif;
+    --font: "Press Start 2P", cursive;
     --text-color: #000;
     --border-color: rgba(255, 255, 255, 0.2);
     --input-bg: rgba(0, 0, 0, 0.5);
@@ -280,6 +280,7 @@ body {
 	padding: 0;
 	overflow-x: hidden;
 	animation: rainbowBackground 10s ease infinite;
+	background-size: 400% 400%;
 }
 
 .banner {

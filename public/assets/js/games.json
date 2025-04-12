@@ -1829,6 +1829,16 @@
       "name": "Nazi Zombies Portable",
       "url": "/x?url=/assets/games/nzp/",
       "image": "/assets/images/games/nazi.jpg"
+    },
+    {
+      "name": "Retro Bowl College",
+      "url": "/x?url=/assets/games/rbcollege/",
+      "image": "/assets/images/games/rbcollege.png"
+    },
+    {
+      "name": "Quake",
+      "url": "/x?url=/assets/games/quake/",
+      "image": "/assets/images/games/quake.jpeg"
     }
   ]
 }

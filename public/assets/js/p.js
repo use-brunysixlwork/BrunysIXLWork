@@ -6,7 +6,7 @@ const PARTICLE_COLORS = {
   "theme-light": "#0d0d0d",
   "theme-blue": "#7FDBFF",
   "theme-hacker": "#00ff44",
-  "theme-amythest": "#7a4988"
+  "theme-amethyst": "#7a4988"
 };
 
 const loadParticles = (color = "#ffffff") => {

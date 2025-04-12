@@ -16,7 +16,7 @@ const PARTICLE_COLORS = {
   "theme-midnight": "#444444",
   "theme-storm": "#575757",
   "theme-evergreen": "#4e5d42",
-  "theme-nebula": "#3c3c3e",
+  "theme-nebula": "#d1b2ff",
   "theme-volcanic": "#5c322b",
   "theme-autumn": "#7d4d2c"
 };

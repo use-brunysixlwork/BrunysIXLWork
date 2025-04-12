@@ -1,133 +1,135 @@
 const PARTICLES_ID = "particles-js";
-    const PARTICLES_STORAGE_KEY = "particlesEnabled";
+const PARTICLES_STORAGE_KEY = "particlesEnabled";
+const THEME_STORAGE_KEY = "selected-theme";
+const PARTICLE_COLORS = {
+  default: "#ffffff",
+  "theme-light": "#0d0d0d",
+  "theme-blue": "#7FDBFF",
+  "theme-hacker": "#00ff44"
+};
 
-    const PARTICLE_COLORS = {
-      default: "#ffffff",
-      "theme-light": "#0d0d0d",
-      "theme-blue": "#7FDBFF",
-      "theme-hacker": "#00ff44"
-    };
-
-    const loadParticles = (color = "#ffffff") => {
-      if (!document.getElementById(PARTICLES_ID)) {
-        const div = document.createElement("div");
-        div.id = PARTICLES_ID;
-        document.body.appendChild(div);
-        div.style.position = "fixed";
-        div.style.width = "100%";
-        div.style.height = "100%";
-        div.style.zIndex = "-1";
-        div.style.top = "0";
-        div.style.left = "0";
-      }
-
-      particlesJS(PARTICLES_ID, {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: color },
-          shape: { type: "circle" },
-          opacity: { value: 0.5 },
-          size: { value: 2, random: true },
-          line_linked: {
-            enable: false,
-            distance: 150,
-            color: color,
-            opacity: 0.4,
-            width: 1
-          },
-          move: {
-            enable: true,
-            speed: 2,
-            direction: "none",
-            out_mode: "out"
-          }
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "repulse" },
-            onclick: { enable: true, mode: "push" },
-            resize: true
-          },
-          modes: {
-            repulse: { distance: 100 },
-            push: { particles_nb: 4 }
-          }
-        },
-        retina_detect: true
-      });
-    };
-
-    const removeParticles = () => {
-      const canvas = document.querySelector(`#${PARTICLES_ID} canvas`);
-      if (canvas) canvas.remove();
-    };
-
-    const isParticlesEnabled = () =>
-      localStorage.getItem(PARTICLES_STORAGE_KEY) !== "false";
-
-    const updateButton = () => {
-      const button = document.getElementById("toggle-particles");
-      if (button) {
-        button.textContent = isParticlesEnabled()
-          ? "Disable Particles"
-          : "Enable Particles";
-      }
-    };
-
-    const toggleParticles = () => {
-      const enabled = isParticlesEnabled();
-      if (enabled) {
-        localStorage.setItem(PARTICLES_STORAGE_KEY, "false");
-        removeParticles();
-      } else {
-        localStorage.setItem(PARTICLES_STORAGE_KEY, "true");
-
-        const currentTheme = localStorage.getItem("selected-theme") || "default";
-        const color = PARTICLE_COLORS[currentTheme] || "#ffffff";
-
-        loadParticles(color);
-      }
-      updateButton();
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const selector = document.getElementById("theme-selector");
-      const savedTheme = localStorage.getItem("selected-theme");
-      const currentTheme = savedTheme && savedTheme !== "default" ? savedTheme : "default";
-
-      if (savedTheme && savedTheme !== "default") {
-        document.body.classList.add(savedTheme);
-        selector.value = savedTheme;
-      }
-
-      if (isParticlesEnabled()) {
-        loadParticles(PARTICLE_COLORS[currentTheme] || "#ffffff");
-      }
-
-      updateButton();
-
-      selector.addEventListener("change", () => {
-        document.body.classList.remove("theme-light", "theme-blue");
-
-        const selected = selector.value;
-
-        if (selected === "default") {
-          localStorage.removeItem("selected-theme");
-        } else {
-          document.body.classList.add(selected);
-          localStorage.setItem("selected-theme", selected);
-        }
-
-        if (isParticlesEnabled()) {
-          removeParticles();
-          const color = PARTICLE_COLORS[selected] || "#ffffff";
-          loadParticles(color);
-        }
-      });
-
-      const toggleButton = document.getElementById("toggle-particles");
-      if (toggleButton) {
-        toggleButton.addEventListener("click", toggleParticles);
-      }
+const loadParticles = (color = "#ffffff") => {
+  if (!document.getElementById(PARTICLES_ID)) {
+    const div = document.createElement("div");
+    div.id = PARTICLES_ID;
+    document.body.appendChild(div);
+    Object.assign(div.style, {
+      position: "fixed",
+      width: "100%",
+      height: "100%",
+      zIndex: "-1",
+      top: "0",
+      left: "0"
     });
+  }
+
+  particlesJS(PARTICLES_ID, {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: color },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 2, random: true },
+      line_linked: {
+        enable: false,
+        distance: 150,
+        color: color,
+        opacity: 0.4,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
+        out_mode: "out"
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" },
+        resize: true
+      },
+      modes: {
+        repulse: { distance: 100 },
+        push: { particles_nb: 4 }
+      }
+    },
+    retina_detect: true
+  });
+};
+
+const removeParticles = () => {
+  const container = document.getElementById(PARTICLES_ID);
+  if (container) container.remove();
+};
+
+const isParticlesEnabled = () =>
+  localStorage.getItem(PARTICLES_STORAGE_KEY) !== "false";
+
+const updateTheme = (theme) => {
+  document.body.classList.remove("theme-light", "theme-blue");
+  if (theme && theme !== "default") {
+    document.body.classList.add(theme);
+  }
+};
+
+const saveTheme = (theme) => {
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  updateTheme(theme);
+  removeParticles();
+  if (isParticlesEnabled()) {
+    const color = PARTICLE_COLORS[theme] || "#ffffff";
+    loadParticles(color);
+  }
+};
+
+const updateParticlesButton = () => {
+  const btn = document.getElementById("toggle-particles");
+  if (btn) {
+    btn.textContent = isParticlesEnabled()
+      ? "Disable Particles"
+      : "Enable Particles";
+  }
+};
+
+const toggleParticles = () => {
+  const enabled = isParticlesEnabled();
+  localStorage.setItem(PARTICLES_STORAGE_KEY, enabled ? "false" : "true");
+  removeParticles();
+  if (!enabled) {
+    const theme = localStorage.getItem(THEME_STORAGE_KEY) || "default";
+    const color = PARTICLE_COLORS[theme] || "#ffffff";
+    loadParticles(color);
+  }
+  updateParticlesButton();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "default";
+  updateTheme(savedTheme);
+
+  
+  if (isParticlesEnabled()) {
+    const color = PARTICLE_COLORS[savedTheme] || "#ffffff";
+    loadParticles(color);
+  }
+  updateParticlesButton();
+
+
+  const themeSelector = document.getElementById("theme-selector");
+  if (themeSelector) {
+    themeSelector.value = savedTheme;
+    themeSelector.addEventListener("change", (e) => {
+      saveTheme(e.target.value);
+    });
+  }
+
+
+  const toggleBtn = document.getElementById("toggle-particles");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", toggleParticles);
+  }
+});

@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;500&display=swap');
 
 
 :root {
@@ -73,6 +77,63 @@
     --scroll-track: #ede3f5; 
     --highlight-bg: #4b0150;
     --highlight-text: #ffffff; 
+}
+
+.theme-emerald {
+    --bg-color: #e2f5e9;
+    --font: "Mukta", sans-serif;
+    --text-color: #084c41;
+    --border-color: #97d7bd;
+    --input-bg: rgba(255, 255, 255, 0.65);
+    --hover-color: #065c48;
+    --box-bg: rgba(226, 245, 233, 0.6);
+    --scroll-thumb: #3ba887;
+    --scroll-track: #e2f5e9;
+    --highlight-bg: #065c48;
+    --highlight-text: #ffffff;
+}
+
+.theme-ruby {
+    --bg-color: #fce9ea;
+    --font: "Raleway", sans-serif;
+    --text-color: #5b0b1b;
+    --border-color: #e59aa4;
+    --input-bg: rgba(255, 255, 255, 0.55);
+    --hover-color: #991b30;
+    --box-bg: rgba(252, 233, 234, 0.6);
+    --scroll-thumb: #cc3a50;
+    --scroll-track: #fce9ea;
+    --highlight-bg: #991b30;
+    --highlight-text: #ffffff;
+}
+
+.theme-topaz {
+    --bg-color: #fffbe8;
+    --font: "Josefin Sans", sans-serif;
+    --text-color: #5e4a00;
+    --border-color: #e7d76c;
+    --input-bg: rgba(255, 255, 255, 0.6);
+    --hover-color: #b29100;
+    --box-bg: rgba(255, 251, 232, 0.6);
+    --scroll-thumb: #ccb400;
+    --scroll-track: #fffbe8;
+    --highlight-bg: #b29100;
+    --highlight-text: #ffffff;
+}
+
+
+.theme-opal {
+    --bg-color: #f1fcfa;
+    --font: "Karla", sans-serif;
+    --text-color: #234043;
+    --border-color: #a2d4c9;
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --hover-color: #2c5f63;
+    --box-bg: rgba(241, 252, 250, 0.6);
+    --scroll-thumb: #4ca69e;
+    --scroll-track: #f1fcfa;
+    --highlight-bg: #2c5f63;
+    --highlight-text: #ffffff;
 }
 
 #particles-js {

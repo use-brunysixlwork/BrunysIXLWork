@@ -6,7 +6,13 @@ const PARTICLE_COLORS = {
   "theme-light": "#0d0d0d",
   "theme-blue": "#7FDBFF",
   "theme-hacker": "#00ff44",
-  "theme-amethyst": "#7a4988"
+  "theme-amethyst": "#7a4988",
+  "theme-amethyst": "#4b0150",
+  "theme-sapphire": "#0a3d62",
+  "theme-emerald": "#065c48",
+  "theme-ruby": "#991b30",
+  "theme-topaz": "#b29100",
+  "theme-opal": "#2c5f63"
 };
 
 const loadParticles = (color = "#ffffff") => {

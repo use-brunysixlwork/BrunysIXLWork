@@ -1,17 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
-/*
-body {
-    background: url('/assets/images/bg.jpg') no-repeat center center fixed;
-    background-size: cover; 
-    font-family: "Lexend", sans-serif;
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+:root {
+    --bg-color: #000;
+    --font: "Lexend", sans-serif;
+    --text-color: #fff;
+    --border-color: #141414;
+    --input-bg: rgba(0,0,0,0.5);
+    --hover-color: #ccc;
+    --box-bg: rgba(0,0,0,0.5);
+    --scroll-thumb: #fff;
+    --scroll-track: transparent;
+    --highlight-bg: #fff;
+    --highlight-text: #0d0d0d;
 }
-*/
+
+.theme-light {
+    --bg-color: #f0f0f0;
+    --text-color: #0d0d0d;
+    --border-color: #ccc;
+    --input-bg: rgba(255, 255, 255, 0.7);
+    --hover-color: #333;
+    --box-bg: rgba(255, 255, 255, 0.5);
+    --scroll-thumb: #0d0d0d;
+    --scroll-track: #f0f0f0;
+    --highlight-bg: #000;
+    --highlight-text: #fff;
+}
+
+.theme-blue {
+    --bg-color: #001f3f;
+    --text-color: #7FDBFF;
+    --border-color: #0074D9;
+    --input-bg: rgba(0, 31, 63, 0.6);
+    --hover-color: #39CCCC;
+    --box-bg: rgba(0, 31, 63, 0.5);
+    --scroll-thumb: #7FDBFF;
+    --scroll-track: #001f3f;
+    --highlight-bg: #39CCCC;
+    --highlight-text: #001f3f;
+}
 
 #particles-js {
 	position: fixed;
@@ -23,13 +50,13 @@ body {
 }  
 
 body {
-    background-color: #000;
-    font-family: "Lexend", sans-serif;
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+	background-color: var(--bg-color);
+	font-family: var(--font);
+	color: var(--text-color);
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
 }
 
 .banner {
@@ -41,27 +68,30 @@ body {
 	justify-content: center;
 	text-align: center;
 	background: none;
-	color: #fff;
+	color: var(--text-color);
 	position: relative;
-    font-family: "Lexend", sans-serif;
+	font-family: var(--font);
 }
+
 #uv-form {
-    margin-top: 10px;
+	margin-top: 10px;
 }
+
 .form__input {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #141414;
-    border-radius: 50px;
-    width: 300px;
-    text-align: center;
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    font-family: "Lexend", sans-serif;
+	padding: 10px;
+	font-size: 16px;
+	border: 2px solid var(--border-color);
+	border-radius: 50px;
+	width: 300px;
+	text-align: center;
+	color: var(--text-color);
+	background: var(--input-bg);
+	font-family: var(--font);
 }
+
 #dynamic-text {
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+	cursor: pointer;
+	transition: opacity 0.3s ease;
 }
 
 .scroll-down-btn {
@@ -70,7 +100,7 @@ body {
 	bottom: 20px;
 	background-color: transparent;
 	border: none;
-	color: #fff;
+	color: var(--text-color);
 	font-size: 24px;
 	cursor: pointer;
 }
@@ -87,55 +117,56 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	color: white;
+	color: var(--text-color);
 	z-index: 99999;
 }
+
 .nav-links {
 	list-style: none;
 	display: flex;
 	gap: 20px;
 	margin-right: 30px;
 }
+
 .nav-links a {
-	color: white;
+	color: var(--text-color);
 	text-decoration: none;
 	font-size: 18px;
 	transition: 0.2s ease-in-out;
 }
+
 .nav-links a:hover {
-	color: #ccc;
+	color: var(--hover-color);
 }
 
 #searchBar {
 	display: flex;
-	margin: 0 auto;
-	margin-bottom: 20px;
+	margin: 0 auto 20px;
 	padding: 10px;
 	width: 50%;
 	border-radius: 50px;
-	border: 2px solid #141414;
-	background-color: rgba(0, 0, 0, 0.5);
-	color: #fff;
-
+	border: 2px solid var(--border-color);
+	background-color: var(--input-bg);
+	color: var(--text-color);
 }
 
-.button-container {
-	margin-right: 100px;
-	margin-left: 100px;
+.button-container,
+.container-buttons {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 10px;
+	margin: 0 100px;
 }
 
 .filter-button {
 	padding: 15px 25px;
 	font-size: 16px;
-	border: 2px solid #141414;
+	border: 2px solid var(--border-color);
 	margin: 3px;
 	cursor: pointer;
-	background-color: rgba(0, 0, 0, 0.5);
-	color: white;
+	background-color: var(--input-bg);
+	color: var(--text-color);
 	border-radius: 50px;
 	transition: 0.3s;
 }
@@ -144,93 +175,76 @@ body {
 	background-color: #555;
 }
 
-.container-buttons {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 10px;
-}
-
-.container {
-	margin: 0 auto;
+.container,
+#games-container {
+	margin: 20px auto 0;
 	max-width: 1200px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 20px;
-	margin-top: 20px;
-}
-
-#games-container {
-    margin: 0 auto;
-    max-width: 1200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
 }
 
 .game-box {
-    background: rgba(0,0,0,0.5);
-    border: 2px solid #141414;
-    padding: 7px;
-    width: 170px;
-    border-radius: 10px;
-    text-align: center;
-    transition: 0.2s ease-in-out;
-    position: relative;
-    overflow: hidden; 
+	background: var(--box-bg);
+	border: 2px solid var(--border-color);
+	padding: 7px;
+	width: 170px;
+	border-radius: 10px;
+	text-align: center;
+	transition: 0.2s ease-in-out;
+	position: relative;
+	overflow: hidden;
 }
 
 .game-box:hover {
-    transform: translateY(-5px);
+	transform: translateY(-5px);
 }
 
 .game-box a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    position: relative;
+	text-decoration: none;
+	color: var(--text-color);
+	display: block;
+	position: relative;
 }
 
 .loader {
-    width: 40px;
-    height: 40px;
-    border: 5px solid rgba(255, 255, 255, 0.3);
-    border-top: 5px solid #fff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	width: 40px;
+	height: 40px;
+	border: 5px solid rgba(255, 255, 255, 0.3);
+	border-top: 5px solid var(--text-color);
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+	0% { transform: translate(-50%, -50%) rotate(0deg); }
+	100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .game-box img {
-    width: 170px;
-    height: 170px;
-    object-fit: cover;
-    display: block;
-    opacity: 0; 
-    transition: opacity 0.3s ease-in-out;
+	width: 170px;
+	height: 170px;
+	object-fit: cover;
+	display: block;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
 }
 
 .game-title {
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
 }
 
 .container-frame {
 	display: flex;
 	align-items: flex-start;
-} 
+}
 
 iframe {
 	margin-left: 5vh;
@@ -248,10 +262,10 @@ iframe {
 	align-items: center;
 	width: 70vw;
 	gap: 5px;
-	background: rgba(0,0,0,0.5);
-	border-left: 2px solid #141414;
-	border-right: 2px solid #141414;
-	border-bottom: 2px solid #141414;
+	background: var(--box-bg);
+	border-left: 2px solid var(--border-color);
+	border-right: 2px solid var(--border-color);
+	border-bottom: 2px solid var(--border-color);
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 }
@@ -260,7 +274,7 @@ iframe {
 	padding: 10px;
 	font-size: 20px;
 	background-color: transparent;
-	color: #ffffff;
+	color: var(--text-color);
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -271,25 +285,24 @@ iframe {
 }
 
 .controls button:hover {
-	color: #ccc;
+	color: var(--hover-color);
 }
 
 .ad-box-iframe {
 	margin-right: 3.5vw;
 	width: 20vw;
 	height: 75vh;
-	background: rgba(0,0,0,0.5);
-	border: 2px solid #141414;
-	position: absolute; 
-	right: 0; 
-	top: 20px; 
+	background: var(--box-bg);
+	border: 2px solid var(--border-color);
+	position: absolute;
+	right: 0;
+	top: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 10px;
 	overflow: hidden;
 }
-
 
 .ad-box-iframe iframe {
 	margin-right: 2.5vw;
@@ -317,7 +330,7 @@ iframe {
 hr {
 	border: none;
 	height: 2px;
-	background-color: #fff;
+	background-color: var(--text-color);
 	margin: 40px auto;
 	width: 50%;
 }
@@ -331,11 +344,11 @@ h1 {
 	margin: 0 auto;
 	width: 70vw;
 	height: 80px;
-	background-color: #141414;
+	background-color: var(--border-color);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: var(--text-color);
 	border: none;
 	border-radius: 8px;
 }
@@ -345,59 +358,59 @@ a {
 }
 
 .my-container {
-    display: flex;
-    flex-direction: column; 
-    gap: 30px; 
-    width: 50vw; 
-    margin: 0 auto; 
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	width: 50vw;
+	margin: 0 auto;
 }
 
 .my-box {
-    background-color: rgba(0,0,0,0.5); 
-    padding: 20px; 
-    color: white; 
-    text-align: center; 
-    border: 2px solid #141414;
-    border-radius: 50px; 
+	background-color: var(--box-bg);
+	padding: 20px;
+	color: var(--text-color);
+	text-align: center;
+	border: 2px solid var(--border-color);
+	border-radius: 50px;
 }
 
 .ad-container {
-    position: relative;
-    width: 728px;
-    height: 90px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
+	position: relative;
+	width: 728px;
+	height: 90px;
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
 }
 
 .ad-container iframe {
-    display: block;
-    width: 728px !important;
-    height: 90px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
+	display: block;
+	width: 728px !important;
+	height: 90px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
 }
 
 * {
-    scrollbar-width: thin;
-    scrollbar-color: #fff transparent;
+	scrollbar-width: thin;
+	scrollbar-color: var(--scroll-thumb) var(--scroll-track);
 }
 
 *::-webkit-scrollbar {
-    width: 4px;
+	width: 4px;
 }
 
 *::-webkit-scrollbar-track {
-    background: transparent;
+	background: var(--scroll-track);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #fff;
-    border-radius: 10px;
+	background-color: var(--scroll-thumb);
+	border-radius: 10px;
 }
 
 ::selection {
-	background-color: #fff;
-	color: #0d0d0d;
+	background-color: var(--highlight-bg);
+	color: var(--highlight-text);
 }

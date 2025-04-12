@@ -1,9 +1,14 @@
-
-    const PARTICLES_ID = "particles-js";
+const PARTICLES_ID = "particles-js";
     const PARTICLES_STORAGE_KEY = "particlesEnabled";
 
+    const PARTICLE_COLORS = {
+      default: "#ffffff",
+      "theme-light": "#0d0d0d",
+      "theme-blue": "#7FDBFF",
+      "theme-hacker": "#00ff44"
+    };
 
-    const loadParticles = () => {
+    const loadParticles = (color = "#ffffff") => {
       if (!document.getElementById(PARTICLES_ID)) {
         const div = document.createElement("div");
         div.id = PARTICLES_ID;
@@ -19,14 +24,14 @@
       particlesJS(PARTICLES_ID, {
         particles: {
           number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" },
+          color: { value: color },
           shape: { type: "circle" },
           opacity: { value: 0.5 },
           size: { value: 2, random: true },
           line_linked: {
             enable: false,
             distance: 150,
-            color: "#ffffff",
+            color: color,
             opacity: 0.4,
             width: 1
           },
@@ -53,17 +58,14 @@
       });
     };
 
-    
     const removeParticles = () => {
       const canvas = document.querySelector(`#${PARTICLES_ID} canvas`);
       if (canvas) canvas.remove();
     };
 
-    
     const isParticlesEnabled = () =>
       localStorage.getItem(PARTICLES_STORAGE_KEY) !== "false";
 
-    
     const updateButton = () => {
       const button = document.getElementById("toggle-particles");
       if (button) {
@@ -73,7 +75,6 @@
       }
     };
 
-   
     const toggleParticles = () => {
       const enabled = isParticlesEnabled();
       if (enabled) {
@@ -81,18 +82,49 @@
         removeParticles();
       } else {
         localStorage.setItem(PARTICLES_STORAGE_KEY, "true");
-        loadParticles();
+
+        const currentTheme = localStorage.getItem("selected-theme") || "default";
+        const color = PARTICLE_COLORS[currentTheme] || "#ffffff";
+
+        loadParticles(color);
       }
       updateButton();
     };
 
-    
-    window.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const selector = document.getElementById("theme-selector");
+      const savedTheme = localStorage.getItem("selected-theme");
+      const currentTheme = savedTheme && savedTheme !== "default" ? savedTheme : "default";
+
+      if (savedTheme && savedTheme !== "default") {
+        document.body.classList.add(savedTheme);
+        selector.value = savedTheme;
+      }
+
       if (isParticlesEnabled()) {
-        loadParticles();
+        loadParticles(PARTICLE_COLORS[currentTheme] || "#ffffff");
       }
 
       updateButton();
+
+      selector.addEventListener("change", () => {
+        document.body.classList.remove("theme-light", "theme-blue");
+
+        const selected = selector.value;
+
+        if (selected === "default") {
+          localStorage.removeItem("selected-theme");
+        } else {
+          document.body.classList.add(selected);
+          localStorage.setItem("selected-theme", selected);
+        }
+
+        if (isParticlesEnabled()) {
+          removeParticles();
+          const color = PARTICLE_COLORS[selected] || "#ffffff";
+          loadParticles(color);
+        }
+      });
 
       const toggleButton = document.getElementById("toggle-particles");
       if (toggleButton) {

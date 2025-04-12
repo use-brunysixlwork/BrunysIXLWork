@@ -1839,6 +1839,11 @@
       "name": "Quake",
       "url": "/x?url=/assets/games/quake/",
       "image": "/assets/images/games/quake.jpeg"
+    },
+    {
+      "name": "Half-Life",
+      "url": "/x?url=/assets/games/hl/",
+      "image": "/assets/images/games/halflife.jpg"
     }
   ]
 }

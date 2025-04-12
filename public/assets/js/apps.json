@@ -40,7 +40,7 @@
       {
         "name": "Fluid Simulator",
         "url": "/x?url=/assets/apps/fluidsim/",
-        "image": "/assets/images/apps/webglfluid.png"
+        "image": "/assets/images/apps/webglfluid.jpg"
       },
 
       {
@@ -76,13 +76,13 @@
       {
         "name": "Weave Silk",
         "url": "/x?url=/assets/apps/weavesilk/",
-        "image": "/assets/images/apps/weavesilk.png"
+        "image": "/assets/images/apps/weavesilk.jpg"
       },
       
       {
         "name": "Zip Opener",
         "url": "/x?url=/assets/apps/zipop",
-        "image": "/assets/images/games/zip.jpg"
+        "image": "/assets/images/apps/zip.jpg"
       }
 
     ]

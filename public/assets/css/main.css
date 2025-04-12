@@ -14,7 +14,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&family=Lato&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 
 
 :root {
@@ -242,34 +242,6 @@
     --highlight-text: #0d0d0d;
 }
 
-.theme-rainbow {
-    --bg-color: linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet);
-    --font: "Press Start 2P", cursive;
-    --text-color: #000;
-    --border-color: rgba(255, 255, 255, 0.2);
-    --input-bg: rgba(0, 0, 0, 0.5);
-    --hover-color: #ccc;
-    --box-bg: rgba(0, 0, 0, 0.6);
-    --scroll-thumb: #fff;
-    --scroll-track: rgba(255, 255, 255, 0.1);
-    --highlight-bg: #fff;
-    --highlight-text: #000;
-}
-
-.theme-rainbow body {
-    background: var(--bg-color);
-    background-size: 400% 400%;
-    animation: rainbowBackground 10s ease infinite;
-    font-family: var(--font);
-    color: var(--text-color);
-}
-
-@keyframes rainbowBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 #particles-js {
 	position: fixed;
 	width: 100%;
@@ -277,13 +249,7 @@
 	z-index: -1;
 	top: 0;
 	left: 0;
-} 
-
-@keyframes rainbowBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+}  
 
 body {
 	background-color: var(--bg-color);
@@ -293,8 +259,6 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
-	animation: rainbowBackground 10s ease infinite;
-	background-size: 400% 400%;
 }
 
 .banner {

@@ -19,8 +19,7 @@ const PARTICLE_COLORS = {
   "theme-nebula": "#f5f5f5", 
   "theme-volcanic": "#e4c9b3", 
   "theme-autumn": "#f7f0e1",
-  "theme-jimmy": "#FFD700",
-  "theme-rainbow": "#000"
+  "theme-jimmy": "#FFD700"
 };
 
 const loadParticles = (color = "#ffffff") => {

@@ -143,16 +143,16 @@
 }
 
 .theme-midnight {
-    --bg-color: #2e2e2e;
+    --bg-color: #1b1b2f;  
     --font: "Open Sans", sans-serif;
     --text-color: #ffffff;
-    --border-color: #555555;
+    --border-color: #333366;  
     --input-bg: rgba(255, 255, 255, 0.2);
-    --hover-color: #444444;
-    --box-bg: rgba(50, 50, 50, 0.7);
-    --scroll-thumb: #333333;
-    --scroll-track: #2e2e2e;
-    --highlight-bg: #444444;
+    --hover-color: #2c2c50;  
+    --box-bg: rgba(15, 15, 40, 0.8);  
+    --scroll-thumb: #444c73;  
+    --scroll-track: #1b1b2f;  
+    --highlight-bg: #2c2c50; 
     --highlight-text: #ffffff;
 }
 

@@ -13,12 +13,12 @@ const PARTICLE_COLORS = {
   "theme-ruby": "#991b30",
   "theme-topaz": "#b29100",
   "theme-opal": "#2c5f63",
-  "theme-midnight": "#444444",
-  "theme-storm": "#575757",
-  "theme-evergreen": "#4e5d42",
-  "theme-nebula": "#d1b2ff",
-  "theme-volcanic": "#5c322b",
-  "theme-autumn": "#7d4d2c"
+  "theme-midnight": "#ffffff", 
+  "theme-storm": "#d0d0d0", 
+  "theme-evergreen": "#d4e1d1", 
+  "theme-nebula": "#f5f5f5", 
+  "theme-volcanic": "#e4c9b3", 
+  "theme-autumn": "#f7f0e1"
 };
 
 const loadParticles = (color = "#ffffff") => {

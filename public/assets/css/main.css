@@ -33,20 +33,6 @@
     --highlight-text: #fff;
 }
 
-.theme-amethyst {
-    --bg-color: #ede3f5; 
-	--font: "Quicksand", sans-serif;
-    --text-color: #2d033b; 
-    --border-color: #c8a2c8; 
-    --input-bg: rgba(255, 255, 255, 0.6);
-    --hover-color: #4b0150; 
-    --box-bg: rgba(237, 227, 245, 0.6); 
-    --scroll-thumb: #7a4988; 
-    --scroll-track: #ede3f5; 
-    --highlight-bg: #4b0150;
-    --highlight-text: #ffffff; 
-}
-
 .theme-blue {
     --bg-color: #001f3f;
 	--font: "Poppins", sans-serif;
@@ -73,6 +59,20 @@
     --scroll-track: transparent;
     --highlight-bg: #000;
     --highlight-text: #00ff44;
+}
+
+.theme-amethyst {
+    --bg-color: #ede3f5; 
+	--font: "Quicksand", sans-serif;
+    --text-color: #2d033b; 
+    --border-color: #c8a2c8; 
+    --input-bg: rgba(255, 255, 255, 0.6);
+    --hover-color: #4b0150; 
+    --box-bg: rgba(237, 227, 245, 0.6); 
+    --scroll-thumb: #7a4988; 
+    --scroll-track: #ede3f5; 
+    --highlight-bg: #4b0150;
+    --highlight-text: #ffffff; 
 }
 
 #particles-js {

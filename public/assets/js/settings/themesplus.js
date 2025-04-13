@@ -1,36 +1,30 @@
-   
-    window.addEventListener('DOMContentLoaded', function () {
-        const savedTheme = localStorage.getItem('selectedTheme');
-        const nameElement = document.getElementById('site-name');
-        const selector = document.getElementById('theme-selector');
+const themeNameMap = {
+    'theme-jimmy': 'Jimmys Games'
+};
 
-        if (savedTheme) {
-            document.body.className = savedTheme;
+function applyTheme(theme) {
+    document.body.className = theme;
+    localStorage.setItem('selectedTheme', theme);
 
-            if (selector) {
-                selector.value = savedTheme;
-            }
+    const nameElement = document.getElementById('site-name');
+    if (nameElement) {
+        nameElement.textContent = themeNameMap[theme] || '';
+    }
 
-            if (nameElement) {
-                nameElement.textContent = (savedTheme === 'theme-jimmy') ? "Jimmys Games" : "BrunysIXLWork";
-            }
-        }
-    });
+    const selector = document.getElementById('theme-selector');
+    if (selector) {
+        selector.value = theme;
+    }
+}
 
+window.addEventListener('DOMContentLoaded', function () {
+    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-default';
+    applyTheme(savedTheme);
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const selector = document.getElementById('theme-selector');
-        const nameElement = document.getElementById('site-name');
-
-        if (selector) {
-            selector.addEventListener('change', function () {
-                const selectedTheme = this.value;
-                document.body.className = selectedTheme;
-                localStorage.setItem('selectedTheme', selectedTheme);
-
-                if (nameElement) {
-                    nameElement.textContent = (selectedTheme === 'theme-jimmy') ? "Jimmys Games" : "BrunysIXLWork";
-                }
-            });
-        }
-    });
+    const selector = document.getElementById('theme-selector');
+    if (selector) {
+        selector.addEventListener('change', function () {
+            applyTheme(this.value);
+        });
+    }
+});

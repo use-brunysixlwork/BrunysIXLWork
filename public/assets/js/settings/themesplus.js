@@ -1,30 +1,42 @@
-const themeNameMap = {
-    'theme-jimmy': 'Jimmys Games'
-};
-
-function applyTheme(theme) {
-    document.body.className = theme;
-    localStorage.setItem('selectedTheme', theme);
-
-    const nameElement = document.getElementById('site-name');
-    if (nameElement) {
-        nameElement.textContent = themeNameMap[theme] || '';
-    }
-
-    const selector = document.getElementById('theme-selector');
-    if (selector) {
-        selector.value = theme;
-    }
-}
-
 window.addEventListener('DOMContentLoaded', function () {
-    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-default';
-    applyTheme(savedTheme);
-
+    const savedTheme = localStorage.getItem('selectedTheme');
+    const nameElement = document.getElementById('site-name');
     const selector = document.getElementById('theme-selector');
+
+    const themeNames = {
+        'theme-jimmy': 'Jimmys Games'
+    };
+
+    if (savedTheme) {
+        document.body.className = savedTheme;
+
+        if (selector) {
+            selector.value = savedTheme;
+        }
+
+        if (nameElement) {
+            nameElement.textContent = themeNames[savedTheme] || 'My Site';
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const selector = document.getElementById('theme-selector');
+    const nameElement = document.getElementById('site-name');
+
+    const themeNames = {
+        'theme-jimmy': 'Jimmys Games'
+    };
+
     if (selector) {
         selector.addEventListener('change', function () {
-            applyTheme(this.value);
+            const selectedTheme = this.value;
+            document.body.className = selectedTheme;
+            localStorage.setItem('selectedTheme', selectedTheme);
+
+            if (nameElement) {
+                nameElement.textContent = themeNames[selectedTheme] || 'My Site';
+            }
         });
     }
 });

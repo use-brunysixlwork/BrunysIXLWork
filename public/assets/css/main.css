@@ -433,6 +433,7 @@ body {
 	height: 170px;
 	object-fit: cover;
 	display: block;
+	border-radius: 10px;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }

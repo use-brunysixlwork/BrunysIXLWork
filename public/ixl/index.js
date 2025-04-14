@@ -20,7 +20,6 @@ const error = document.getElementById("uv-error");
  */
 const errorCode = document.getElementById("uv-error-code");
 
-// Attach form submit event listener
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -33,11 +32,35 @@ form.addEventListener("submit", async (event) => {
   }
 
   const url = search(address.value, searchEngine.value);
-  location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+  const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(url);
+  localStorage.setItem("url", `${encodeURIComponent(encodedUrl)}`);
+  window.location.href = `/ixl/`;
 });
 
-// Autofill function with auto-submit
-function autofill(url) {
-  address.value = url;
-  form.requestSubmit(); // Automatically submit the form
+async function launchURL(openURL) {
+  try {
+    await registerSW();
+  } catch (err) {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  }
+
+  const url = search(openURL, searchEngine.value);
+  location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+}
+
+async function launchGame(openURL) {
+  try {
+    await registerSW();
+  } catch (err) {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  }
+
+  const url = search(openURL, searchEngine.value);
+  const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(url);
+  localStorage.setItem('storedURL', encodedUrl);
+  window.location.href = "/ixl/";
 }

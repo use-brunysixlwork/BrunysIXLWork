@@ -594,6 +594,24 @@ a {
 	border: none !important;
 }
 
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+}
+
+.image-container img {
+    width: 110px;
+    height: 110px;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.image-container img:hover {
+    transform: scale(1.1);
+}
+
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--scroll-thumb) var(--scroll-track);

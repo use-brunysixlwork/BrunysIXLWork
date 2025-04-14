@@ -597,7 +597,7 @@ a {
 .image-container {
     position: relative;
     display: inline-block;
-    margin: 15px;
+    margin: 5px;
 }
 
 .image-container img {
@@ -606,6 +606,7 @@ a {
     border: none;
     border-radius: 10px;
     transition: transform 0.2s ease, filter 0.2s ease;
+	margin: 15px;
 }
 
 .image-container img:hover {

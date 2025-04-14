@@ -19,6 +19,7 @@ const routes = [
   { path: "/a", file: "aps.html" },
   { path: "/s", file: "set.html" },
   { path: "/x", file: "iframe.html" },
+  { path: "/p", file: "prtnrs.html" },
   { path: "/404", file: "404.html" },
 ];
 

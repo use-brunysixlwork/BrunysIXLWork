@@ -1,149 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R26WEY1GMN"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        gtag("js", new Date());
-        gtag("config", "G-R26WEY1GMN");
-    </script>
+  <title>BrunysIXLWork | Launcher</title>
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <title>BrunysIXLWork | Launcher</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R26WEY1GMN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-R26WEY1GMN");
+  </script>
 
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            background: #0d0d0d;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-        }
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      background: #0d0d0d;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .search-bar-container {
-            width: 100%;
-            padding: 10px;
-            background-color: #1a1a1a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            z-index: 1001;
-        }
+    .search-bar-container {
+      background-color: #1a1a1a;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .url-input {
-            width: 80%;
-            max-width: 600px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-            font-size: 16px;
-        }
+    .url-input {
+      width: 80%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+    }
 
-        .overlay-buttons {
-            position: absolute;
-            top: 60px;
-            left: 10px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-        }
+    .tab-bar {
+      display: flex;
+      background: #1a1a1a;
+      overflow-x: auto;
+      padding: 5px;
+      border-bottom: 1px solid #333;
+    }
 
-        .overlay-buttons button {
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            border: none;
-            padding: 10px;
-            margin-bottom: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s ease-in-out;
-        }
+    .tab {
+      display: flex;
+      align-items: center;
+      background: #2a2a2a;
+      margin-right: 5px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-        .overlay-buttons button:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
+    .tab.active {
+      background: #444;
+    }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            flex-grow: 1;
-        }
-    </style>
+    .tab-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .tab-close {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .browser-window {
+      flex-grow: 1;
+      position: relative;
+    }
+
+    .browser-window iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    .overlay-buttons {
+      position: absolute;
+      top: 60px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .overlay-buttons button {
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-bottom: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s ease-in-out;
+    }
+
+    .overlay-buttons button:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  </style>
 </head>
-
 <body>
-    <div class="search-bar-container">
-        <input class="url-input" type="text" placeholder="Enter a URL..." />
-    </div>
 
-    <div class="overlay-buttons">
-        <button onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
-        <button onclick="reloadIframe()"><i class="fas fa-sync-alt"></i></button>
-        <button onclick="goForward()"><i class="fas fa-arrow-alt-circle-right"></i></button>
-        <button onclick="goBack()"><i class="fas fa-arrow-alt-circle-left"></i></button>
-    </div>
+  <div class="search-bar-container">
+    <input class="url-input" type="text" placeholder="Enter a URL..." />
+  </div>
 
-    <iframe src="" id="proxyIframe"></iframe>
+  <div class="tab-bar"></div>
 
-    <script src="/ixl/launcher.js"></script>
+  <div class="browser-window"></div>
 
-    <script>
-        const iframe = document.querySelector('iframe');
-        let lastURL = '';
+  <div class="overlay-buttons">
+    <button onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+    <button onclick="reloadIframe()"><i class="fas fa-sync-alt"></i></button>
+    <button onclick="goForward()"><i class="fas fa-arrow-alt-circle-right"></i></button>
+    <button onclick="goBack()"><i class="fas fa-arrow-alt-circle-left"></i></button>
+  </div>
 
-        function checkIframeURL() {
-            try {
-                const currentURL = iframe.contentWindow.location.href;
-                if (currentURL !== lastURL) {
-                    console.log(`Iframe URL changed to: ${currentURL}`);
-                    lastURL = currentURL;
+  <script>
+    const tabs = [];
+    let activeTab = null;
 
-                    const websitePath = currentURL.replace(window.location.origin, "").replace("/ixl/work/", "");
-                    localStorage.setItem("decoded", websitePath);
+    function decode(str) {
+      try {
+        return decodeURIComponent(atob(str));
+      } catch {
+        return str;
+      }
+    }
 
-                    const decodedValue = __uv$config.decodeUrl(websitePath);
-                    document.querySelector(".url-input").value = decodedValue;
+    function openTab(url) {
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.onload = () => {
+        updateTabTitle(tabs[tabs.length - 1]);
+        fetchFavicon(url).then(iconUrl => {
+          updateUrlInput(activeTab);
+          if (iconUrl) {
+            activeTab.tab.querySelector(".tab-icon").src = iconUrl;
+          }
+        });
+      };
+      document.querySelector(".browser-window").appendChild(iframe);
 
-                    if (decodedValue === "a`owt8bnalk") {
-                        document.querySelector(".url-input").value = "Loading your content...";
-                    }
+      const tab = document.createElement("div");
+      tab.classList.add("tab");
+      const tabIcon = document.createElement("img");
+      tabIcon.classList.add("tab-icon");
+      tabIcon.src = "https://www.google.com/s2/favicons?sz=64&domain=e";
+      const tabTitle = document.createElement("span");
+      tabTitle.classList.add("tab-title");
+      tabTitle.textContent = "Loading...";
+      const tabClose = document.createElement("span");
+      tabClose.classList.add("tab-close");
+      tabClose.textContent = "×";
 
-                    monitorIframeProgress(iframe.contentWindow);
-                }
-            } catch (error) {
-                console.error('Cannot access iframe URL due to cross-origin policy');
-            }
+      tab.append(tabIcon, tabTitle, tabClose);
+      tab.addEventListener("click", e => {
+        if (e.target.classList.contains("tab-close")) {
+          closeTab(tab);
+        } else {
+          switchTab(tab);
         }
+      });
 
-        setInterval(checkIframeURL, 1000);
+      document.querySelector(".tab-bar").appendChild(tab);
 
-        function erudaToggle() {
-            if (!document.getElementById("iframeid")) return;
-            const erudaWindow = document.getElementById("iframeid").contentWindow;
-            const erudaDocument = document.getElementById("iframeid").contentDocument;
-            if (!erudaWindow || !erudaDocument) return;
-            if (erudaWindow.eruda?._isInit) {
-                erudaWindow.eruda.destroy();
-            } else {
-                let script = erudaDocument.createElement("script");
-                script.src = "https://cdn.jsdelivr.net/npm/eruda";
-                script.onload = function () {
-                    if (!erudaWindow) return;
-                    erudaWindow.eruda.init();
-                    erudaWindow.eruda.show();
-                };
-                erudaDocument.head.appendChild(script);
-            }
+      const tabObj = { tab, iframe };
+      tabs.push(tabObj);
+      switchTab(tab);
+    }
+
+    function closeTab(tab) {
+      const index = tabs.findIndex(t => t.tab === tab);
+      if (index !== -1) {
+        const tabObj = tabs[index];
+        tabObj.iframe.remove();
+        tab.remove();
+        tabs.splice(index, 1);
+
+        if (activeTab && activeTab.tab === tab) {
+          if (tabs.length > 0) {
+            switchTab(tabs[Math.max(index - 1, 0)].tab);
+          } else {
+            activeTab = null;
+            updateUrlInput();
+          }
         }
-    </script>
+      }
+    }
+
+    function switchTab(tab) {
+      if (activeTab) {
+        activeTab.tab.classList.remove("active");
+        activeTab.iframe.style.display = "none";
+      }
+      activeTab = tabs.find(t => t.tab === tab);
+      activeTab.tab.classList.add("active");
+      activeTab.iframe.style.display = "block";
+      updateUrlInput(activeTab);
+    }
+
+    function updateTabTitle(tabObj) {
+      try {
+        const title = tabObj.iframe.contentWindow.document.title || "New Tab";
+        tabObj.tab.querySelector(".tab-title").textContent = title;
+      } catch {
+        tabObj.tab.querySelector(".tab-title").textContent = "Cross-origin";
+      }
+    }
+
+    function updateUrlInput(tabObj) {
+      const urlInput = document.querySelector(".url-input");
+      if (!tabObj) {
+        urlInput.value = "";
+        urlInput.setAttribute("readonly", true);
+      } else {
+        const raw = tabObj.iframe.src;
+        urlInput.value = raw;
+        urlInput.removeAttribute("readonly");
+      }
+    }
+
+    function fetchFavicon(url) {
+      return new Promise(resolve => {
+        const domain = new URL(url).hostname;
+        const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+        const img = new Image();
+        img.onload = () => resolve(faviconUrl);
+        img.onerror = () => resolve(null);
+        img.src = faviconUrl;
+      });
+    }
+
+    document.querySelector(".url-input").addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        const val = e.target.value.trim();
+        if (!val) return;
+        const finalUrl = val.startsWith("http") ? val : "https://" + val;
+        openTab(finalUrl);
+        e.target.value = "";
+      }
+    });
+
+    // Controls
+    function reloadIframe() {
+      if (activeTab) activeTab.iframe.src = activeTab.iframe.src;
+    }
+
+    function goForward() {
+      if (activeTab) {
+        try {
+          activeTab.iframe.contentWindow.history.forward();
+        } catch {}
+      }
+    }
+
+    function goBack() {
+      if (activeTab) {
+        try {
+          activeTab.iframe.contentWindow.history.back();
+        } catch {}
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+  <script src="/ixl/launcher.js"></script>
 </body>
 </html>

@@ -1844,6 +1844,26 @@
       "name": "Half-Life",
       "url": "/x?url=/assets/games/hl/",
       "image": "/assets/images/games/halflife.jpg"
+    },
+    {
+      "name": "Basket Random",
+      "url": "/x?url=/assets/games/basketballrandom/",
+      "image": "/assets/images/games/basketballrandom.jpg"
+    },
+    {
+      "name": "Volley Random",
+      "url": "/x?url=/assets/games/volley-random/",
+      "image": "/assets/images/games/volleyrandom.jpg"
+    },
+    {
+      "name": "Soccer Random",
+      "url": "/x?url=/assets/games/soccerrandom/",
+      "image": "/assets/images/games/soccerrandom.jpg"
+    },
+    {
+      "name": "Boxing Random",
+      "url": "/x?url=/assets/games/boxing-random/",
+      "image": "/assets/images/games/boxingrandom.jpg"
     }
   ]
 }

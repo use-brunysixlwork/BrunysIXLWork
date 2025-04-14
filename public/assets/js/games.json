@@ -1864,6 +1864,11 @@
       "name": "Boxing Random",
       "url": "/x?url=/assets/games/boxing-random/",
       "image": "/assets/images/games/boxingrandom.jpg"
+    },
+    {
+      "name": "Stickman Hook",
+      "url": "/x?url=/assets/games/stickmanhook/",
+      "image": "/assets/images/games/stickmanhook.jpg"
     }
   ]
 }

@@ -597,7 +597,7 @@ a {
 .image-container {
     position: relative;
     display: inline-block;
-    margin: 5px;
+    margin: 15px;
 }
 
 .image-container img {

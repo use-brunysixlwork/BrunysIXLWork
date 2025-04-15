@@ -4,135 +4,110 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>New Tab</title>
-  <link rel="icon" href="https://ssl.gstatic.com/chrome/newtab/favicon-32.png" id="dynamic-favicon"/>
-
-  <script src="/ixl/uv/uv.bundle.js" defer></script>
-  <script src="/ixl/uv/uv.config.js" defer></script>
-  <script src="/ixl/register-sw.js" defer></script>
-  <script src="/ixl/search.js" defer></script>
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+  <link rel="icon" id="favicon" href="https://ssl.gstatic.com/chrome/newtab/favicon-32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      background: #202124;
-      color: #e8eaed;
+      background-color: #f1f3f4;
       font-family: 'Roboto', sans-serif;
-      overflow: hidden;
     }
 
-    .tab-bar {
+    .navbar {
       display: flex;
+      padding: 8px;
+      background: #e8eaed;
       align-items: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #uv-form {
+      flex: 1;
+      display: flex;
+    }
+
+    .url-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background: white;
+    }
+
+    .tabs {
+      display: flex;
+      background-color: #d7dadc;
       padding: 4px;
-      background: #303134;
-      border-bottom: 1px solid #5f6368;
+      gap: 8px;
       overflow-x: auto;
+      align-items: center;
     }
 
     .tab {
-      display: flex;
-      align-items: center;
-      background: #3c4043;
-      margin-right: 6px;
       padding: 6px 12px;
-      border-radius: 6px 6px 0 0;
+      background: white;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 14px;
       white-space: nowrap;
-      max-width: 200px;
     }
 
     .tab.active {
-      background: #202124;
+      background: #c2e7ff;
     }
 
-    .tab span {
-      flex-grow: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .tab-close {
+      margin-left: 6px;
+      color: #999;
+      cursor: pointer;
     }
 
-    .tab button {
-      margin-left: 8px;
-      background: transparent;
-      color: #9aa0a6;
-      border: none;
+    .new-tab-btn {
+      padding: 6px 12px;
+      background: #e0e0e0;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
       font-weight: bold;
     }
 
-    .tab button:hover {
-      color: white;
-    }
-
-    .add-tab {
-      background: #5f6368;
-      border: none;
-      color: white;
-      font-size: 20px;
-      border-radius: 4px;
-      padding: 0 10px;
-      cursor: pointer;
-    }
-
-    .chrome-bar {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      background: #303134;
-    }
-
-    #uv-address {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
-      color: #e8eaed;
-      background: #3c4043;
-      outline: none;
-    }
-
-    #uv-address::placeholder {
-      color: #9aa0a6;
-    }
-
-    button.go-btn {
-      margin-left: 8px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: none;
-      background: #1a73e8;
-      color: white;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    button.go-btn:hover {
-      background: #4285f4;
-    }
-
     iframe {
       width: 100%;
-      height: calc(100vh - 92px);
+      height: calc(100vh - 108px);
       border: none;
+    }
+
+    .desc {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="tab-bar" id="tab-bar">
-    <!-- Tabs inserted here -->
-    <button class="add-tab" id="new-tab">+</button>
+  <div class="navbar">
+    <form id="uv-form">
+      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+      <input class="url-input" id="uv-address" type="text" placeholder="Search Google or type an URL"/>
+    </form>
   </div>
 
-  <form id="uv-form" class="chrome-bar">
-    <input id="uv-search-engine" type="hidden" value="https://www.google.com/search?q=%s"/>
-    <input id="uv-address" class="url-input" type="text" placeholder="Search Google or type a URL"/>
-    <button class="go-btn" type="submit">Go</button>
-  </form>
+  <div class="tabs" id="tabs">
+    <!-- Tabs will go here -->
+    <div class="new-tab-btn" onclick="createTab()">+</div>
+  </div>
+
+  <div class="desc left-margin">
+    <p id="uv-error"></p>
+    <pre id="uv-error-code"></pre>
+  </div>
 
   <div id="iframe-container"></div>
 
+  <!-- UV Scripts -->
+  <script src="/ixl/uv/uv.bundle.js" defer></script>
+  <script src="/ixl/uv/uv.config.js" defer></script>
+  <script src="/ixl/register-sw.js" defer></script>
+  <script src="/ixl/search.js" defer></script>
   <script src="/ixl/index.js" defer></script>
 </body>
 </html>

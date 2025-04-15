@@ -2,7 +2,7 @@ const form = document.getElementById("uv-form");
 const address = document.getElementById("uv-address");
 const tabsContainer = document.getElementById("tabs");
 const iframeContainer = document.getElementById("iframe-container");
-const favicon = document.querySelector("link[rel~='icon']");
+const favicon = document.getElementById("favicon");
 
 let tabs = [];
 let activeTab = null;
@@ -12,48 +12,23 @@ function createTab(url = "/ixl/home.html") {
     id: Date.now().toString(),
     iframe: document.createElement("iframe"),
     title: "New Tab",
-    favicon: "https://ssl.gstatic.com/chrome/newtab/favicon-32.png",
+    favicon: null,
     url: url,
   };
 
   tab.iframe.style.display = "none";
-  tab.iframe.src = url;
-
-  // Load event to update title, favicon and address bar
-  tab.iframe.onload = () => {
-    try {
-      const doc = tab.iframe.contentDocument || tab.iframe.contentWindow.document;
-      tab.title = doc.title || "New Tab";
-      tab.favicon = getFavicon(doc) || tab.favicon;
-      tab.url = tab.iframe.contentWindow.location.href;
-
-      // If it's the active tab, reflect updates
-      if (tab === activeTab) {
-        document.title = tab.title;
-        favicon.href = tab.favicon;
-        address.value = tab.url;
-      }
-    } catch (e) {
-      // Cross-origin access — just use URL
-      tab.title = "New Tab";
-      tab.url = tab.iframe.src;
-      if (tab === activeTab) {
-        document.title = tab.title;
-        favicon.href = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
-        address.value = tab.url;
-      }
-    }
-  };
-
   iframeContainer.appendChild(tab.iframe);
   tabs.push(tab);
   setActiveTab(tab);
-  renderTabs();
-}
 
-function getFavicon(doc) {
-  const link = doc.querySelector("link[rel~='icon']");
-  return link ? link.href : null;
+  // Ensure full path for home page
+  if (!url.startsWith("http")) {
+    tab.iframe.src = url;
+  } else {
+    loadUrl(url);
+  }
+
+  renderTabs();
 }
 
 function renderTabs() {
@@ -89,37 +64,93 @@ function setActiveTab(tab) {
   activeTab = tab;
   activeTab.iframe.style.display = "block";
 
-  // Try to update title, favicon, and search bar
-  try {
-    const doc = activeTab.iframe.contentDocument || activeTab.iframe.contentWindow.document;
-    activeTab.title = doc.title || "New Tab";
-    activeTab.favicon = getFavicon(doc) || activeTab.favicon;
-    activeTab.url = activeTab.iframe.contentWindow.location.href;
-
-    document.title = activeTab.title;
-    favicon.href = activeTab.favicon;
-    address.value = activeTab.url;
-  } catch (e) {
-    document.title = "New Tab";
-    favicon.href = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
-    address.value = activeTab.iframe.src;
-  }
-
+  document.title = tab.title;
+  favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+  address.value = tab.url || "";
   renderTabs();
+
+  startDetectionLoop(tab);
 }
 
-// Hook form submission to load URL
-form.addEventListener("submit", (e) => {
+function closeTab(tab) {
+  const index = tabs.indexOf(tab);
+  if (index !== -1) {
+    iframeContainer.removeChild(tab.iframe);
+    tabs.splice(index, 1);
+
+    if (tab === activeTab) {
+      const newTab = tabs[index] || tabs[index - 1];
+      if (newTab) {
+        setActiveTab(newTab);
+      } else {
+        createTab();
+      }
+    } else {
+      renderTabs();
+    }
+  }
+}
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!activeTab) return;
 
   const input = address.value.trim();
-  if (!input) return;
+  const isUrl = input.startsWith("http://") || input.startsWith("https://");
+  const searchEngine = document.getElementById("uv-search-engine").value;
+  const finalUrl = isUrl ? input : searchEngine.replace("%s", encodeURIComponent(input));
+  const encoded = __uv$config.prefix + __uv$config.encodeUrl(finalUrl);
 
-  const isURL = input.includes(".") || input.startsWith("http");
-  const url = isURL ? (input.startsWith("http") ? input : "https://" + input)
-                    : `https://www.google.com/search?q=${encodeURIComponent(input)}`;
+  await registerSW();
 
-  activeTab.iframe.src = url;
-  activeTab.url = url;
+  activeTab.iframe.src = encoded;
+  activeTab.url = finalUrl;
+  activeTab.title = "Loading...";
+  activeTab.favicon = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+
+  setActiveTab(activeTab);
+});
+
+// 🔁 Constantly check tab content every 2 seconds
+function startDetectionLoop(tab) {
+  const detect = () => {
+    if (tab !== activeTab) return;
+
+    try {
+      const doc = tab.iframe.contentDocument || tab.iframe.contentWindow.document;
+      const title = doc.title;
+      const iconLink = doc.querySelector("link[rel~='icon']");
+      const currentUrl = tab.iframe.contentWindow.location.href;
+
+      if (title && title !== tab.title) {
+        tab.title = title;
+      }
+
+      if (iconLink && iconLink.href !== tab.favicon) {
+        tab.favicon = iconLink.href;
+      }
+
+      if (currentUrl && currentUrl !== tab.url) {
+        tab.url = currentUrl;
+      }
+
+      // Keep UI in sync
+      if (tab === activeTab) {
+        document.title = tab.title;
+        favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+        address.value = tab.url || "";
+        renderTabs();
+      }
+    } catch (e) {
+      // Likely a cross-origin iframe
+    }
+  };
+
+  detect(); // Run once immediately
+  clearInterval(tab._detector);
+  tab._detector = setInterval(detect, 2000); // Run every 2s
+}
+
+window.addEventListener("load", () => {
+  createTab(); // Load home page
 });

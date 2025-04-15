@@ -72,6 +72,7 @@
     <form id="uv-form">
       <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
       <input class="url-input" id="uv-address" type="text" placeholder="Search Google or type a URL" class="form__input"/>
+      <button type="submit">Search</button>
     </form>
     <div class="desc left-margin">
       <p id="uv-error"></p>
@@ -82,10 +83,6 @@
   <!-- Iframe to display search results using UV Proxy -->
   <iframe id="uv-iframe" src="" name="uv-iframe"></iframe>
 
-  <div class="tab-bar">
-    <div id="new-tab" class="tab">New Tab</div>
-  </div>
-
-  <script src="/ixl/index.js" defer=""></script>
+  <script src="index.js" defer=""></script>
 </body>
 </html>

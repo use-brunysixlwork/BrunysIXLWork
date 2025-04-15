@@ -7,9 +7,6 @@ const favicon = document.querySelector("link[rel~='icon']");
 let tabs = [];
 let activeTab = null;
 
-// Debounce timer variable
-let debounceTimer;
-
 function createTab(url = "/startpage") {
   const tab = {
     id: Date.now().toString(),
@@ -109,7 +106,6 @@ form.addEventListener("submit", async (e) => {
   setActiveTab(activeTab);
 });
 
-// ✅ Constantly detect title, favicon, and URL from iframe
 function startDetectionLoop(tab) {
   const detect = () => {
     if (tab !== activeTab) return;
@@ -135,7 +131,6 @@ function startDetectionLoop(tab) {
         tab.url = rawUrl;
       }
 
-      // ✅ Update title, address bar, and favicon if active
       if (tab === activeTab) {
         document.title = tab.title;
         address.value = decodedUrl;
@@ -145,25 +140,14 @@ function startDetectionLoop(tab) {
         renderTabs();
       }
     } catch (e) {
-      // Likely cross-origin iframe, silently fail
     }
   };
 
-  detect(); // Run once
+  detect();
   clearInterval(tab._detector);
-  tab._detector = setInterval(detect, 2000); // Run every 2 seconds
+  tab._detector = setInterval(detect, 2000);
 }
 
-// Debounce the input and trigger search when typing stops
-address.addEventListener("input", () => {
-  clearTimeout(debounceTimer);
-
-  // Delay the search for 500ms after typing stops
-  debounceTimer = setTimeout(() => {
-    form.dispatchEvent(new Event("submit")); // Trigger the search after 500ms of inactivity
-  }, 500);
-});
-
 window.addEventListener("load", () => {
-  createTab(); // Load home page tab
+  createTab();
 });

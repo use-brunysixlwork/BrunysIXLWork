@@ -52,20 +52,7 @@ function renderTabs() {
   tabsContainer.appendChild(newTabBtn);
 }
 
-function setActiveTab(tab) {
-  if (activeTab) activeTab.iframe.style.display = "none";
-  activeTab = tab;
-  activeTab.iframe.style.display = "block";
 
-  document.title = tab.title;
-  if (favicon) {
-    favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
-  }
-  address.value = tab.url || "";
-  renderTabs();
-
-  startDetectionLoop(tab);
-}
 
 function closeTab(tab) {
   const index = tabs.indexOf(tab);

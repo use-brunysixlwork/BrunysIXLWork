@@ -1,6 +1,7 @@
 @import url('/assets/css/themes.css');
 
 body {
+    overflow: hidden;
     margin: 0;
     font-family: var(--font);
     background-color: var(--bg-color);

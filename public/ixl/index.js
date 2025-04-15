@@ -7,7 +7,7 @@ const favicon = document.getElementById("favicon");
 let tabs = [];
 let activeTab = null;
 
-function createTab(url = "/") {
+function createTab(url = "/ixl/home.html") {
   const tab = {
     id: Date.now().toString(),
     iframe: document.createElement("iframe"),

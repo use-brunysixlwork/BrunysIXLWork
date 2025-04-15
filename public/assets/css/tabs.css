@@ -75,7 +75,7 @@ iframe {
     width: 100%;
     height: calc(100vh - 112px);
     border: none;
-    
+    background-color: var(--bg-color);
 }
 
 .desc {

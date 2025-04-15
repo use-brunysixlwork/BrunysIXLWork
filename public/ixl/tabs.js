@@ -2,32 +2,25 @@ const form = document.getElementById("uv-form");
 const address = document.getElementById("uv-address");
 const tabsContainer = document.getElementById("tabs");
 const iframeContainer = document.getElementById("iframe-container");
-const favicon = document.getElementById("favicon");
+const favicon = document.querySelector("link[rel~='icon']");
 
 let tabs = [];
 let activeTab = null;
 
-function createTab(url = "/") {
+function createTab(url = "/ixl/home.html") {
   const tab = {
     id: Date.now().toString(),
     iframe: document.createElement("iframe"),
     title: "New Tab",
-    favicon: null,
+    favicon: "https://ssl.gstatic.com/chrome/newtab/favicon-32.png",
     url: url,
   };
 
   tab.iframe.style.display = "none";
+  tab.iframe.src = url;
   iframeContainer.appendChild(tab.iframe);
   tabs.push(tab);
   setActiveTab(tab);
-
-  // Ensure full path for home page
-  if (!url.startsWith("http")) {
-    tab.iframe.src = url;
-  } else {
-    loadUrl(url);
-  }
-
   renderTabs();
 }
 
@@ -65,7 +58,9 @@ function setActiveTab(tab) {
   activeTab.iframe.style.display = "block";
 
   document.title = tab.title;
-  favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+  if (favicon) {
+    favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+  }
   address.value = tab.url || "";
   renderTabs();
 
@@ -109,9 +104,7 @@ form.addEventListener("submit", async (e) => {
   activeTab.favicon = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
 
   setActiveTab(activeTab);
-}
-
-);
+});
 
 // 🔁 Constantly check tab content every 2 seconds
 function startDetectionLoop(tab) {
@@ -134,7 +127,9 @@ function startDetectionLoop(tab) {
       // Keep UI in sync
       if (tab === activeTab) {
         document.title = tab.title;
-        favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+        if (favicon) {
+          favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+        }
         renderTabs();
       }
     } catch (e) {

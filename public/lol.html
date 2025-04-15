@@ -1,150 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Combined Tab System</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    #uv-form {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .form__input {
-      padding: 10px;
-      width: 400px;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .tab-bar {
-      display: flex;
-      background: #222;
-      overflow-x: auto;
-      padding: 10px;
-      border-bottom: 2px solid #444;
-    }
-
-    .tab {
-      display: flex;
-      align-items: center;
-      background: #333;
-      margin-right: 10px;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: #555;
-    }
-
-    .tab img {
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
-    }
-
-    .iframe-container {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-    }
-
-    .iframe-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
-
-    .iframe-container iframe.active {
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Browser</title>
+    <link rel="icon" href="https://www.google.com/s2/favicons?sz=64&domain=e">
+    <style>
+        /* Basic styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            margin: 0;
+        }
+        .browser-window {
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #222;
+        }
+        .tab {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tab-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+        .tab-title {
+            font-size: 14px;
+        }
+        .tab-close {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .url-input {
+            margin: 20px;
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <form id="uv-form">
-    <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
-    <input id="uv-address" type="text" placeholder="Search Google or type an URL" class="form__input"/>
-  </form>
 
-  <div class="tab-bar" id="tab-bar"></div>
-  <div class="iframe-container" id="iframe-container"></div>
+    <div class="browser-window">
+        <div class="tab-bar">
+            <!-- Dynamically created tabs will appear here -->
+        </div>
+        <input type="text" class="url-input" placeholder="Enter URL or Search">
+        <div id="iframe-container"></div>
+    </div>
 
-  <p id="uv-error" style="color:red;"></p>
-  <pre id="uv-error-code" style="color:red;"></pre>
+    <script>
+        // Proxy Browser JS
 
-  <script>
-    "use strict";
+        var tabs = [];
+        var activeTab = null;
 
-    const form = document.getElementById("uv-form");
-    const address = document.getElementById("uv-address");
-    const searchEngine = document.getElementById("uv-search-engine");
-    const error = document.getElementById("uv-error");
-    const errorCode = document.getElementById("uv-error-code");
-    const tabBar = document.getElementById("tab-bar");
-    const iframeContainer = document.getElementById("iframe-container");
+        function openTab(url) {
+            var iframe = document.createElement("iframe");
+            iframe.src = url;
+            iframe.style.display = "none";
+            iframe.onload = function () {
+                updateTabTitle(tabs[tabs.length - 1]);
+                fetchFavicon(url).then(function (iconUrl) {
+                    updateUrlInput(activeTab);
+                    if (iconUrl) {
+                        activeTab.tab.querySelector(".tab-icon").src =
+                            "https://www.google.com/s2/favicons?sz=64&domain=" +
+                            decode(decodeURIComponent(iconUrl.split("/@/")[1])).replace(
+                                /^https?:\/\//,
+                                ""
+                            );
+                        updateUrlInput(activeTab);
+                    } else {
+                        activeTab.tab.querySelector(".tab-icon").src =
+                            "https://www.google.com/s2/favicons?sz=64&domain=e";
+                        updateUrlInput(activeTab);
+                    }
+                });
+            };
+            document.getElementById("iframe-container").appendChild(iframe);
 
-    let tabs = [];
-    let activeTabIndex = -1;
+            var tab = document.createElement("div");
+            tab.classList.add("tab");
+            var tabIcon = document.createElement("img");
+            tabIcon.classList.add("tab-icon");
+            tabIcon.src = "https://www.google.com/s2/favicons?sz=64&domain=e";
+            var tabTitle = document.createElement("span");
+            tabTitle.classList.add("tab-title");
+            tabTitle.textContent = "Blank Page";
+            var tabClose = document.createElement("span");
+            tabClose.classList.add("tab-close");
+            tabClose.textContent = "×";
+            tab.appendChild(tabIcon);
+            tab.appendChild(tabTitle);
+            tab.appendChild(tabClose);
+            tab.addEventListener("click", function (event) {
+                if (event.target.classList.contains("tab-close")) {
+                    closeTab(tab);
+                } else {
+                    switchTab(tab);
+                }
+            });
+            document.querySelector(".tab-bar").appendChild(tab);
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const input = address.value.trim();
-      const url = search(input, searchEngine.value);
-      createTab(url);
-    });
+            tabs.push({
+                tab: tab,
+                iframe: iframe,
+            });
+            switchTab(tab);
+        }
 
-    function search(input, engine) {
-      try {
-        const url = new URL(input);
-        return url.href;
-      } catch (_) {
-        return engine.replace("%s", encodeURIComponent(input));
-      }
-    }
+        function closeTab(tab) {
+            var index = tabs.findIndex((t) => t.tab === tab);
+            if (index !== -1) {
+                var tabObj = tabs[index];
 
-    function createTab(url) {
-      const tabIndex = tabs.length;
-      const iframe = document.createElement("iframe");
-      iframe.src = url;
-      iframe.classList.add("tab-frame");
-      iframeContainer.appendChild(iframe);
+                tab.classList.add("closing");
+                tab.style.animation = "closeTab 0.1s ease forwards";
 
-      const tab = document.createElement("div");
-      tab.className = "tab";
-      tab.innerHTML = `<img src="https://www.google.com/s2/favicons?sz=64&domain_url=${url}"/><span>${url}</span>`;
-      tab.addEventListener("click", () => switchTab(tabIndex));
+                tab.addEventListener("animationend", function () {
+                    tabObj.iframe.parentNode.removeChild(tabObj.iframe);
+                    tab.parentNode.removeChild(tab);
+                    tabs.splice(index, 1);
+                    if (tab.classList.contains("active")) {
+                        if (tabs.length > 0) {
+                            switchTab(tabs[Math.max(index - 1, 0)].tab);
+                        } else {
+                            activeTab = null;
+                            updateUrlInput();
+                        }
+                    }
+                    tab.classList.remove("closing");
+                });
+            }
+        }
 
-      tabBar.appendChild(tab);
-      tabs.push({ tab, iframe });
-      switchTab(tabIndex);
-    }
+        function switchTab(tab) {
+            if (activeTab) {
+                activeTab.tab.classList.remove("active");
+                activeTab.iframe.style.display = "none";
+            }
 
-    function switchTab(index) {
-      if (activeTabIndex !== -1) {
-        tabs[activeTabIndex].iframe.classList.remove("active");
-        tabs[activeTabIndex].tab.classList.remove("active");
-      }
+            activeTab = tabs.find((t) => t.tab === tab);
+            activeTab.tab.classList.add("active");
+            activeTab.iframe.style.display = "block";
+            updateUrlInput(activeTab);
+        }
 
-      tabs[index].iframe.classList.add("active");
-      tabs[index].tab.classList.add("active");
-      activeTabIndex = index;
-    }
-  </script>
-  <script src="/ixl/uv/uv.bundle.js" defer=""></script>
-  <script src="/ixl/uv/uv.config.js" defer=""></script>
-  <script src="/ixl/register-sw.js" defer=""></script>
-  <script src="/ixl/search.js" defer=""></script>
+        function updateTabTitle(tabObj) {
+            var tabTitle = tabObj.iframe.contentWindow.document.title;
+            tabObj.tab.querySelector(".tab-title").textContent = tabTitle;
+        }
+
+        function updateUrlInput(tabObj) {
+            var urlInput = document.querySelector(".url-input");
+            if (tabs.length === 0) {
+                urlInput.value = "";
+                urlInput.setAttribute("readonly", true);
+            } else if (tabObj) {
+                let url = tabObj.iframe.src.split("/@/")[1];
+                const decodedPath = decode(decodeURIComponent(url)).replace(
+                    /^https?:\/\//,
+                    ""
+                );
+
+                urlInput.value = decodedPath !== "uldgfkngd" ? decodedPath : "";
+                urlInput.removeAttribute("readonly");
+            }
+        }
+
+        function fetchFavicon(url) {
+            return new Promise(function (resolve) {
+                var faviconUrl =
+                    "https://www.google.com/s2/favicons?sz=64&domain=" + url;
+                var img = new Image();
+                img.onload = function () {
+                    resolve(faviconUrl);
+                };
+                img.onerror = function () {
+                    resolve(null);
+                };
+                img.src = faviconUrl;
+            });
+        }
+
+        document.querySelector(".url-input").addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                var url = this.value;
+                var isAUrl = url.includes(".");
+
+                if (isAUrl) {
+                    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                        url = "http://" + url;
+                    }
+
+                    openTab(url);
+                } else {
+                    var searchUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(url);
+                    openTab(searchUrl);
+                }
+            }
+        });
+
+        // Open a default "blank page" tab
+        openTab("about:blank");
+
+    </script>
+    <script src="/ixl/uv/uv.bundle.js" defer=""></script>
+    <script src="/ixl/uv/uv.config.js" defer=""></script>
+    <script src="/ixl/register-sw.js" defer=""></script>
+    <script src="/ixl/search.js" defer=""></script>
+
 </body>
 </html>

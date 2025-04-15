@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend&family=Lato&display=swap');
+
+
+
+:root {
+    --bg-color: #000;
+    --font: "Lexend", sans-serif;
+    --text-color: #fff;
+    --border-color: #141414;
+    --input-bg: rgba(0,0,0,0.5);
+    --hover-color: #ccc;
+    --box-bg: rgba(0,0,0,0.5);
+    --scroll-thumb: #fff;
+    --scroll-track: transparent;
+    --highlight-bg: #fff;
+    --highlight-text: #0d0d0d;
+}
+
+.theme-light {
+    --bg-color: #f0f0f0;
+	--font: "Kanit", sans-serif;
+    --text-color: #0d0d0d;
+    --border-color: #ccc;
+    --input-bg: rgba(255, 255, 255, 0.7);
+    --hover-color: #333;
+    --box-bg: rgba(255, 255, 255, 0.5);
+    --scroll-thumb: #0d0d0d;
+    --scroll-track: #f0f0f0;
+    --highlight-bg: #000;
+    --highlight-text: #fff;
+}
+
+.theme-blue {
+    --bg-color: #001f3f;
+	--font: "Poppins", sans-serif;
+    --text-color: #7FDBFF;
+    --border-color: #0074D9;
+    --input-bg: rgba(0, 31, 63, 0.6);
+    --hover-color: #39CCCC;
+    --box-bg: rgba(0, 31, 63, 0.5);
+    --scroll-thumb: #7FDBFF;
+    --scroll-track: #001f3f;
+    --highlight-bg: #39CCCC;
+    --highlight-text: #001f3f;
+}
+
+.theme-hacker {
+    --bg-color: #000;
+    --font: "Roboto Mono", monospace;
+    --text-color: #00ff44;
+    --border-color: #00ff44;
+    --input-bg: rgba(0, 255, 64, 0.5);
+    --hover-color: #00a82d;
+    --box-bg: rgba(0,0,0,0.5);
+    --scroll-thumb: #00ff44;
+    --scroll-track: transparent;
+    --highlight-bg: #000;
+    --highlight-text: #00ff44;
+}
+
+.theme-amethyst {
+    --bg-color: #ede3f5; 
+	--font: "Quicksand", sans-serif;
+    --text-color: #2d033b; 
+    --border-color: #c8a2c8; 
+    --input-bg: rgba(255, 255, 255, 0.6);
+    --hover-color: #4b0150; 
+    --box-bg: rgba(237, 227, 245, 0.6); 
+    --scroll-thumb: #7a4988; 
+    --scroll-track: #ede3f5; 
+    --highlight-bg: #4b0150;
+    --highlight-text: #ffffff; 
+}
+
+.theme-emerald {
+    --bg-color: #e2f5e9;
+    --font: "Mukta", sans-serif;
+    --text-color: #084c41;
+    --border-color: #97d7bd;
+    --input-bg: rgba(255, 255, 255, 0.65);
+    --hover-color: #065c48;
+    --box-bg: rgba(226, 245, 233, 0.6);
+    --scroll-thumb: #3ba887;
+    --scroll-track: #e2f5e9;
+    --highlight-bg: #065c48;
+    --highlight-text: #ffffff;
+}
+
+.theme-ruby {
+    --bg-color: #fce9ea;
+    --font: "Raleway", sans-serif;
+    --text-color: #5b0b1b;
+    --border-color: #e59aa4;
+    --input-bg: rgba(255, 255, 255, 0.55);
+    --hover-color: #991b30;
+    --box-bg: rgba(252, 233, 234, 0.6);
+    --scroll-thumb: #cc3a50;
+    --scroll-track: #fce9ea;
+    --highlight-bg: #991b30;
+    --highlight-text: #ffffff;
+}
+
+.theme-topaz {
+    --bg-color: #fffbe8;
+    --font: "Josefin Sans", sans-serif;
+    --text-color: #5e4a00;
+    --border-color: #e7d76c;
+    --input-bg: rgba(255, 255, 255, 0.6);
+    --hover-color: #b29100;
+    --box-bg: rgba(255, 251, 232, 0.6);
+    --scroll-thumb: #ccb400;
+    --scroll-track: #fffbe8;
+    --highlight-bg: #b29100;
+    --highlight-text: #ffffff;
+}
+
+
+.theme-opal {
+    --bg-color: #f1fcfa;
+    --font: "Karla", sans-serif;
+    --text-color: #234043;
+    --border-color: #a2d4c9;
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --hover-color: #2c5f63;
+    --box-bg: rgba(241, 252, 250, 0.6);
+    --scroll-thumb: #4ca69e;
+    --scroll-track: #f1fcfa;
+    --highlight-bg: #2c5f63;
+    --highlight-text: #ffffff;
+}
+
+.theme-midnight {
+    --bg-color: #1b1b2f;  
+    --font: "Open Sans", sans-serif;
+    --text-color: #ffffff;
+    --border-color: #333366;  
+    --input-bg: rgba(255, 255, 255, 0.2);
+    --hover-color: #2c2c50;  
+    --box-bg: rgba(15, 15, 40, 0.8);  
+    --scroll-thumb: #444c73;  
+    --scroll-track: #1b1b2f;  
+    --highlight-bg: #2c2c50; 
+    --highlight-text: #ffffff;
+}
+
+.theme-storm {
+    --bg-color: #323232;
+    --font: "Roboto", sans-serif;
+    --text-color: #d0d0d0;
+    --border-color: #8a8a8a;
+    --input-bg: rgba(255, 255, 255, 0.3);
+    --hover-color: #575757;
+    --box-bg: rgba(40, 40, 40, 0.6);
+    --scroll-thumb: #6b6b6b;
+    --scroll-track: #323232;
+    --highlight-bg: #575757;
+    --highlight-text: #ffffff;
+}
+
+.theme-evergreen {
+    --bg-color: #253529;
+    --font: "Lato", sans-serif;
+    --text-color: #d4e1d1;
+    --border-color: #5f6a4d;
+    --input-bg: rgba(255, 255, 255, 0.25);
+    --hover-color: #4e5d42;
+    --box-bg: rgba(37, 53, 41, 0.75);
+    --scroll-thumb: #4b5c43;
+    --scroll-track: #253529;
+    --highlight-bg: #4e5d42;
+    --highlight-text: #ffffff;
+}
+
+.theme-nebula {
+    --bg-color: #2b1a47;
+    --font: "Roboto Slab", serif;
+    --text-color: #d1b2ff; 
+    --border-color: #6b3f75; 
+    --input-bg: rgba(75, 34, 106, 0.2); 
+    --hover-color: #4a2e68; 
+    --box-bg: rgba(43, 26, 71, 0.6); 
+    --scroll-thumb: #5f2b80; 
+    --scroll-track: #2b1a47;
+    --highlight-bg: #4a2e68;
+    --highlight-text: #e6caff; 
+}
+
+.theme-volcanic {
+    --bg-color: #3e1f1d;
+    --font: "Montserrat", sans-serif;
+    --text-color: #e4c9b3;
+    --border-color: #7a4a38;
+    --input-bg: rgba(255, 255, 255, 0.3);
+    --hover-color: #5c322b;
+    --box-bg: rgba(62, 31, 29, 0.7);
+    --scroll-thumb: #8e5d47;
+    --scroll-track: #3e1f1d;
+    --highlight-bg: #5c322b;
+    --highlight-text: #ffffff;
+}
+
+.theme-autumn {
+    --bg-color: #4b2d0a;
+    --font: "Merriweather", serif;
+    --text-color: #f7f0e1;
+    --border-color: #9c6d3b;
+    --input-bg: rgba(255, 255, 255, 0.4);
+    --hover-color: #7d4d2c;
+    --box-bg: rgba(75, 45, 10, 0.7);
+    --scroll-thumb: #9c6d3b;
+    --scroll-track: #4b2d0a;
+    --highlight-bg: #7d4d2c;
+    --highlight-text: #ffffff;
+}
+
+.theme-jimmy {
+    --bg-color: #000;
+    --font: "Lato", sans-serif;
+    --text-color: #FFD700; 
+    --border-color: #141414;
+    --input-bg: rgba(0,0,0,0.5);
+    --hover-color: #ccc;
+    --box-bg: rgba(0,0,0,0.5);
+    --scroll-thumb: #FFD700; 
+    --scroll-track: transparent;
+    --highlight-bg: #FFD700; 
+    --highlight-text: #0d0d0d;
+}

@@ -21,7 +21,10 @@ function createTab(url = "/ixl/home.html") {
   tabs.push(tab);
   setActiveTab(tab);
 
-  if (url) {
+  // Ensure full path for home page
+  if (!url.startsWith("http")) {
+    tab.iframe.src = url;
+  } else {
     loadUrl(url);
   }
 
@@ -65,6 +68,8 @@ function setActiveTab(tab) {
   favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
   address.value = tab.url || "";
   renderTabs();
+
+  startDetectionLoop(tab);
 }
 
 function closeTab(tab) {
@@ -103,24 +108,45 @@ form.addEventListener("submit", async (e) => {
   activeTab.title = "Loading...";
   activeTab.favicon = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
 
-  setTimeout(() => detectSiteDetails(activeTab.iframe), 2000);
   setActiveTab(activeTab);
-});
+}
 
-function detectSiteDetails(iframe) {
-  try {
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    const title = doc.title;
-    const iconLink = doc.querySelector("link[rel~='icon']");
+);
 
-    activeTab.title = title || "New Tab";
-    activeTab.favicon = iconLink ? iconLink.href : null;
-    setActiveTab(activeTab);
-  } catch {
-    // Cross-origin — can't detect
-  }
+// 🔁 Constantly check tab content every 2 seconds
+function startDetectionLoop(tab) {
+  const detect = () => {
+    if (tab !== activeTab) return;
+
+    try {
+      const doc = tab.iframe.contentDocument || tab.iframe.contentWindow.document;
+      const title = doc.title;
+      const iconLink = doc.querySelector("link[rel~='icon']");
+
+      if (title && title !== tab.title) {
+        tab.title = title;
+      }
+
+      if (iconLink && iconLink.href !== tab.favicon) {
+        tab.favicon = iconLink.href;
+      }
+
+      // Keep UI in sync
+      if (tab === activeTab) {
+        document.title = tab.title;
+        favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
+        renderTabs();
+      }
+    } catch (e) {
+      // Likely a cross-origin iframe
+    }
+  };
+
+  detect(); // Run once immediately
+  clearInterval(tab._detector);
+  tab._detector = setInterval(detect, 2000); // Run every 2s
 }
 
 window.addEventListener("load", () => {
-  createTab();
+  createTab(); // Load home page
 });

@@ -131,10 +131,9 @@ function startDetectionLoop(tab) {
       // If it's a search query from a known engine, extract just the query string
       const urlObj = new URL(url);
       const queryParam = urlObj.searchParams.get("q") || urlObj.searchParams.get("query");
-      const display = queryParam || url;
 
-      // Update the search bar to show the current search query
-      address.value = display || "";
+      // Update the search bar automatically with the query string or URL
+      address.value = queryParam || "";
 
       // Keep UI in sync
       if (tab === activeTab) {

@@ -7,7 +7,7 @@ const favicon = document.querySelector("link[rel~='icon']");
 let tabs = [];
 let activeTab = null;
 
-function createTab(url = "/") {
+function createTab(url = "/startpage") {
   const tab = {
     id: Date.now().toString(),
     iframe: document.createElement("iframe"),

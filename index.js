@@ -20,6 +20,8 @@ const routes = [
   { path: "/s", file: "set.html" },
   { path: "/x", file: "iframe.html" },
   { path: "/p", file: "prtnrs.html" },
+  { path: "/startpage", file: "startpage.html" },
+  { path: "/t", file: "tabs.html" },
   { path: "/404", file: "404.html" },
 ];
 

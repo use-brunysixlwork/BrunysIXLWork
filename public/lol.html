@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Tab System</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #uv-form {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .form__input {
+      padding: 10px;
+      width: 400px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .tab-bar {
+      display: flex;
+      background: #222;
+      overflow-x: auto;
+      padding: 10px;
+      border-bottom: 2px solid #444;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      background: #333;
+      margin-right: 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #555;
+    }
+
+    .tab img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+    }
+
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    .iframe-container iframe.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <form id="uv-form">
+    <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+    <input id="uv-address" type="text" placeholder="Search Google or type an URL" class="form__input"/>
+  </form>
+
+  <div class="tab-bar" id="tab-bar"></div>
+  <div class="iframe-container" id="iframe-container"></div>
+
+  <p id="uv-error" style="color:red;"></p>
+  <pre id="uv-error-code" style="color:red;"></pre>
+
+  <script>
+    "use strict";
+
+    const form = document.getElementById("uv-form");
+    const address = document.getElementById("uv-address");
+    const searchEngine = document.getElementById("uv-search-engine");
+    const error = document.getElementById("uv-error");
+    const errorCode = document.getElementById("uv-error-code");
+    const tabBar = document.getElementById("tab-bar");
+    const iframeContainer = document.getElementById("iframe-container");
+
+    let tabs = [];
+    let activeTabIndex = -1;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = address.value.trim();
+      const url = search(input, searchEngine.value);
+      createTab(url);
+    });
+
+    function search(input, engine) {
+      try {
+        const url = new URL(input);
+        return url.href;
+      } catch (_) {
+        return engine.replace("%s", encodeURIComponent(input));
+      }
+    }
+
+    function createTab(url) {
+      const tabIndex = tabs.length;
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.classList.add("tab-frame");
+      iframeContainer.appendChild(iframe);
+
+      const tab = document.createElement("div");
+      tab.className = "tab";
+      tab.innerHTML = `<img src="https://www.google.com/s2/favicons?sz=64&domain_url=${url}"/><span>${url}</span>`;
+      tab.addEventListener("click", () => switchTab(tabIndex));
+
+      tabBar.appendChild(tab);
+      tabs.push({ tab, iframe });
+      switchTab(tabIndex);
+    }
+
+    function switchTab(index) {
+      if (activeTabIndex !== -1) {
+        tabs[activeTabIndex].iframe.classList.remove("active");
+        tabs[activeTabIndex].tab.classList.remove("active");
+      }
+
+      tabs[index].iframe.classList.add("active");
+      tabs[index].tab.classList.add("active");
+      activeTabIndex = index;
+    }
+  </script>
+  <script src="/ixl/uv/uv.bundle.js" defer=""></script>
+  <script src="/ixl/uv/uv.config.js" defer=""></script>
+  <script src="/ixl/register-sw.js" defer=""></script>
+  <script src="/ixl/search.js" defer=""></script>
+</body>
+</html>

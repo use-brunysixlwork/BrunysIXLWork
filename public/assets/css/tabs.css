@@ -1,5 +1,12 @@
 @import url('/assets/css/themes.css');
 
+body {
+    margin: 0;
+    font-family: var(--font);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
 .tabs {
     display: flex;
     background-color: var(--bg-color);

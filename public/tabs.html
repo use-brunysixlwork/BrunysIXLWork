@@ -23,6 +23,16 @@
         <script type='text/javascript' src='//pl26249077.effectiveratecpm.com/cf/db/ac/cfdbacfc38d02c97d6025d4f0bda36fd.js'></script>
 </head>
 <body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+              if (!localStorage.getItem('alertShown')) {
+                  alert("THIS FEATURE IS STILL IN BETA! SO NOT EVERYTHING HERE IS FINALIZED.");
+  
+                  localStorage.setItem('alertShown', 'true');
+              }
+          })
+  </script>
+
   <div class="tabs" id="tabs">
     <div class="new-tab-btn" onclick="createTab()">+</div>
   </div>

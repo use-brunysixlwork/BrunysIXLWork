@@ -154,3 +154,4 @@ function startDetectionLoop(tab) {
 window.addEventListener("load", () => {
   createTab(); // Load home page tab
 });
+

@@ -106,16 +106,19 @@ form.addEventListener("submit", async (e) => {
   setActiveTab(activeTab);
 });
 
-// 🔁 Constantly check tab content every 2 seconds
+// ✅ Constantly detect title, favicon, and URL from iframe
 function startDetectionLoop(tab) {
   const detect = () => {
     if (tab !== activeTab) return;
 
     try {
-      const doc = tab.iframe.contentDocument || tab.iframe.contentWindow.document;
+      const win = tab.iframe.contentWindow;
+      const doc = tab.iframe.contentDocument || win.document;
+
       const title = doc.title;
       const iconLink = doc.querySelector("link[rel~='icon']");
-      const currentUrl = tab.iframe.contentWindow.location.href;
+      const rawUrl = win.location.href;
+      const decodedUrl = decodeURIComponent(rawUrl.replace(__uv$config.prefix, ""));
 
       if (title && title !== tab.title) {
         tab.title = title;
@@ -125,34 +128,29 @@ function startDetectionLoop(tab) {
         tab.favicon = iconLink.href;
       }
 
-      // Extract the decoded URL from the proxy
-      const url = __uv$config.decodeUrl(currentUrl.replace(__uv$config.prefix, ""));
+      if (rawUrl && rawUrl !== tab.url) {
+        tab.url = rawUrl;
+      }
 
-      // If it's a search query from a known engine, extract just the query string
-      const urlObj = new URL(url);
-      const queryParam = urlObj.searchParams.get("q") || urlObj.searchParams.get("query");
-
-      // Update the search bar automatically with the query string or URL
-      address.value = queryParam || "";
-
-      // Keep UI in sync
+      // ✅ Update title, address bar, and favicon if active
       if (tab === activeTab) {
         document.title = tab.title;
+        address.value = decodedUrl;
         if (favicon) {
           favicon.href = tab.favicon || "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
         }
         renderTabs();
       }
     } catch (e) {
-      // Likely a cross-origin iframe
+      // Likely cross-origin iframe, silently fail
     }
   };
 
-  detect(); // Run once immediately
+  detect(); // Run once
   clearInterval(tab._detector);
-  tab._detector = setInterval(detect, 2000); // Run every 2s
+  tab._detector = setInterval(detect, 2000); // Run every 2 seconds
 }
 
 window.addEventListener("load", () => {
-  createTab(); // Load home page
+  createTab(); // Load home page tab
 });

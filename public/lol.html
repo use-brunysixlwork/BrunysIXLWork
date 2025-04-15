@@ -84,6 +84,12 @@
   </style>
 </head>
 <body>
+
+  <div class="tabs" id="tabs">
+    <!-- Tabs will go here -->
+    <div class="new-tab-btn" onclick="createTab()">+</div>
+  </div>
+
   <div class="navbar">
     <form id="uv-form">
       <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
@@ -91,10 +97,6 @@
     </form>
   </div>
 
-  <div class="tabs" id="tabs">
-    <!-- Tabs will go here -->
-    <div class="new-tab-btn" onclick="createTab()">+</div>
-  </div>
 
   <div class="desc left-margin">
     <p id="uv-error"></p>

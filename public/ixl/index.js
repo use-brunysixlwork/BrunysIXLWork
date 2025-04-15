@@ -21,6 +21,7 @@ function createTab(url = "/ixl/home.html") {
   tabs.push(tab);
   setActiveTab(tab);
 
+  // Ensure full path for home page
   if (!url.startsWith("http")) {
     tab.iframe.src = url;
   } else {
@@ -108,7 +109,9 @@ form.addEventListener("submit", async (e) => {
   activeTab.favicon = "https://ssl.gstatic.com/chrome/newtab/favicon-32.png";
 
   setActiveTab(activeTab);
-});
+}
+
+);
 
 // 🔁 Constantly check tab content every 2 seconds
 function startDetectionLoop(tab) {

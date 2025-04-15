@@ -1,249 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Browser</title>
-    <link rel="icon" href="https://www.google.com/s2/favicons?sz=64&domain=e">
-    <style>
-        /* Basic styles for the page */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
-            margin: 0;
-        }
-        .browser-window {
-            width: 100%;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .tab-bar {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background-color: #222;
-        }
-        .tab {
-            display: flex;
-            align-items: center;
-            margin-right: 10px;
-            padding: 5px 10px;
-            background-color: #333;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .tab-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-        }
-        .tab-title {
-            font-size: 14px;
-        }
-        .tab-close {
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        .url-input {
-            margin: 20px;
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultraviolet Proxy Search</title>
+
+  <!-- Include Ultraviolet JS Scripts -->
+  <script src="/ixl/uv/uv.bundle.js" defer=""></script>
+  <script src="/ixl/uv/uv.config.js" defer=""></script>
+  <script src="/ixl/register-sw.js" defer=""></script>
+  <script src="/ixl/search.js" defer=""></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .form-container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    .tab-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .tab {
+      background-color: #444;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .active-tab {
+      background-color: #666;
+    }
+
+    .tab-close {
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <div class="header">
+    <h1>Ultraviolet Proxy Search</h1>
+  </div>
 
-    <div class="browser-window">
-        <div class="tab-bar">
-            <!-- Dynamically created tabs will appear here -->
-        </div>
-
-        <form id="uv-form">
-          <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
-          <input class="url-input" id="uv-address" type="text" placeholder="Search Google or type an URL" class="form__input"/>
-        </form>
-        <div class="desc left-margin">
-          <p id="uv-error"></p>
-          <pre id="uv-error-code"></pre>
-        </div>
-
-        <div id="iframe-container"></div>
+  <div class="form-container">
+    <form id="uv-form">
+      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+      <input class="url-input" id="uv-address" type="text" placeholder="Search Google or type a URL" class="form__input"/>
+    </form>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
     </div>
+  </div>
 
-    <script>
-        // Proxy Browser JS
+  <!-- Iframe to display search results using UV Proxy -->
+  <iframe id="uv-iframe" src="" name="uv-iframe"></iframe>
 
-        var tabs = [];
-        var activeTab = null;
+  <div class="tab-bar">
+    <div id="new-tab" class="tab">New Tab</div>
+  </div>
 
-        function openTab(url) {
-            var iframe = document.createElement("iframe");
-            iframe.src = url;
-            iframe.style.display = "none";
-            iframe.onload = function () {
-                updateTabTitle(tabs[tabs.length - 1]);
-                fetchFavicon(url).then(function (iconUrl) {
-                    updateUrlInput(activeTab);
-                    if (iconUrl) {
-                        activeTab.tab.querySelector(".tab-icon").src =
-                            "https://www.google.com/s2/favicons?sz=64&domain=" +
-                            decode(decodeURIComponent(iconUrl.split("/@/")[1])).replace(
-                                /^https?:\/\//,
-                                ""
-                            );
-                        updateUrlInput(activeTab);
-                    } else {
-                        activeTab.tab.querySelector(".tab-icon").src =
-                            "https://www.google.com/s2/favicons?sz=64&domain=e";
-                        updateUrlInput(activeTab);
-                    }
-                });
-            };
-            document.getElementById("iframe-container").appendChild(iframe);
-
-            var tab = document.createElement("div");
-            tab.classList.add("tab");
-            var tabIcon = document.createElement("img");
-            tabIcon.classList.add("tab-icon");
-            tabIcon.src = "https://www.google.com/s2/favicons?sz=64&domain=e";
-            var tabTitle = document.createElement("span");
-            tabTitle.classList.add("tab-title");
-            tabTitle.textContent = "Blank Page";
-            var tabClose = document.createElement("span");
-            tabClose.classList.add("tab-close");
-            tabClose.textContent = "×";
-            tab.appendChild(tabIcon);
-            tab.appendChild(tabTitle);
-            tab.appendChild(tabClose);
-            tab.addEventListener("click", function (event) {
-                if (event.target.classList.contains("tab-close")) {
-                    closeTab(tab);
-                } else {
-                    switchTab(tab);
-                }
-            });
-            document.querySelector(".tab-bar").appendChild(tab);
-
-            tabs.push({
-                tab: tab,
-                iframe: iframe,
-            });
-            switchTab(tab);
-        }
-
-        function closeTab(tab) {
-            var index = tabs.findIndex((t) => t.tab === tab);
-            if (index !== -1) {
-                var tabObj = tabs[index];
-
-                tab.classList.add("closing");
-                tab.style.animation = "closeTab 0.1s ease forwards";
-
-                tab.addEventListener("animationend", function () {
-                    tabObj.iframe.parentNode.removeChild(tabObj.iframe);
-                    tab.parentNode.removeChild(tab);
-                    tabs.splice(index, 1);
-                    if (tab.classList.contains("active")) {
-                        if (tabs.length > 0) {
-                            switchTab(tabs[Math.max(index - 1, 0)].tab);
-                        } else {
-                            activeTab = null;
-                            updateUrlInput();
-                        }
-                    }
-                    tab.classList.remove("closing");
-                });
-            }
-        }
-
-        function switchTab(tab) {
-            if (activeTab) {
-                activeTab.tab.classList.remove("active");
-                activeTab.iframe.style.display = "none";
-            }
-
-            activeTab = tabs.find((t) => t.tab === tab);
-            activeTab.tab.classList.add("active");
-            activeTab.iframe.style.display = "block";
-            updateUrlInput(activeTab);
-        }
-
-        function updateTabTitle(tabObj) {
-            var tabTitle = tabObj.iframe.contentWindow.document.title;
-            tabObj.tab.querySelector(".tab-title").textContent = tabTitle;
-        }
-
-        function updateUrlInput(tabObj) {
-            var urlInput = document.querySelector(".url-input");
-            if (tabs.length === 0) {
-                urlInput.value = "";
-                urlInput.setAttribute("readonly", true);
-            } else if (tabObj) {
-                let url = tabObj.iframe.src.split("/@/")[1];
-                const decodedPath = decode(decodeURIComponent(url)).replace(
-                    /^https?:\/\//,
-                    ""
-                );
-
-                urlInput.value = decodedPath !== "uldgfkngd" ? decodedPath : "";
-                urlInput.removeAttribute("readonly");
-            }
-        }
-
-        function fetchFavicon(url) {
-            return new Promise(function (resolve) {
-                var faviconUrl =
-                    "https://www.google.com/s2/favicons?sz=64&domain=" + url;
-                var img = new Image();
-                img.onload = function () {
-                    resolve(faviconUrl);
-                };
-                img.onerror = function () {
-                    resolve(null);
-                };
-                img.src = faviconUrl;
-            });
-        }
-
-        document.querySelector(".url-input").addEventListener("keyup", function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                var url = this.value;
-                var isAUrl = url.includes(".");
-
-                if (isAUrl) {
-                    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                        url = "http://" + url;
-                    }
-
-                    openTab(url);
-                } else {
-                    var searchUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(url);
-                    openTab(searchUrl);
-                }
-            }
-        });
-
-        // Open a default "blank page" tab
-        openTab("about:blank");
-
-    </script>
-    <script src="/ixl/uv/uv.bundle.js" defer=""></script>
-    <script src="/ixl/uv/uv.config.js" defer=""></script>
-    <script src="/ixl/register-sw.js" defer=""></script>
-    <script src="/ixl/search.js" defer=""></script>
-
+  <script src="/ixl/index.js" defer=""></script>
 </body>
 </html>

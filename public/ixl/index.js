@@ -25,7 +25,7 @@ form.addEventListener("submit", async (event) => {
     await registerSW();
 
     // Construct the search URL for Google
-    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    const searchUrl = `https://www.duckduckgo.com/?q=%s${encodeURIComponent(query)}`;
     
     // Use Ultraviolet to encode the URL and generate the correct proxy URL
     const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(searchUrl);

@@ -1,88 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ultraviolet Proxy Search</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Tab</title>
+  <link rel="icon" href="https://ssl.gstatic.com/chrome/newtab/favicon-32.png" id="dynamic-favicon"/>
 
-  <!-- Include Ultraviolet JS Scripts -->
-  <script src="/ixl/uv/uv.bundle.js" defer=""></script>
-  <script src="/ixl/uv/uv.config.js" defer=""></script>
-  <script src="/ixl/register-sw.js" defer=""></script>
-  <script src="/ixl/search.js" defer=""></script>
+  <script src="/ixl/uv/uv.bundle.js" defer></script>
+  <script src="/ixl/uv/uv.config.js" defer></script>
+  <script src="/ixl/register-sw.js" defer></script>
+  <script src="/ixl/search.js" defer></script>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #fff;
       margin: 0;
-      padding: 0;
-    }
-
-    .header {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-    }
-
-    .header h1 {
-      margin: 0;
-    }
-
-    .form-container {
-      text-align: center;
-      padding: 20px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
+      background: #202124;
+      color: #e8eaed;
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
     }
 
     .tab-bar {
       display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
+      align-items: center;
+      padding: 4px;
+      background: #303134;
+      border-bottom: 1px solid #5f6368;
+      overflow-x: auto;
     }
 
     .tab {
-      background-color: #444;
-      padding: 10px;
+      display: flex;
+      align-items: center;
+      background: #3c4043;
+      margin-right: 6px;
+      padding: 6px 12px;
+      border-radius: 6px 6px 0 0;
       cursor: pointer;
+      white-space: nowrap;
+      max-width: 200px;
     }
 
-    .active-tab {
-      background-color: #666;
+    .tab.active {
+      background: #202124;
     }
 
-    .tab-close {
+    .tab span {
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tab button {
+      margin-left: 8px;
+      background: transparent;
+      color: #9aa0a6;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .tab button:hover {
+      color: white;
+    }
+
+    .add-tab {
+      background: #5f6368;
+      border: none;
+      color: white;
       font-size: 20px;
+      border-radius: 4px;
+      padding: 0 10px;
       cursor: pointer;
+    }
+
+    .chrome-bar {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      background: #303134;
+    }
+
+    #uv-address {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      color: #e8eaed;
+      background: #3c4043;
+      outline: none;
+    }
+
+    #uv-address::placeholder {
+      color: #9aa0a6;
+    }
+
+    button.go-btn {
+      margin-left: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      background: #1a73e8;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    button.go-btn:hover {
+      background: #4285f4;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 92px);
+      border: none;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Ultraviolet Proxy Search</h1>
+  <div class="tab-bar" id="tab-bar">
+    <!-- Tabs inserted here -->
+    <button class="add-tab" id="new-tab">+</button>
   </div>
 
-  <div class="form-container">
-    <form id="uv-form">
-      <input id="uv-search-engine" value="https://www.duckduckgo.com/?q=%s" type="hidden"/>
-      <input class="url-input" id="uv-address" type="text" placeholder="Search Google or type a URL" class="form__input"/>
-      <button type="submit">Search</button>
-    </form>
-    <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
-    </div>
-  </div>
+  <form id="uv-form" class="chrome-bar">
+    <input id="uv-search-engine" type="hidden" value="https://www.google.com/search?q=%s"/>
+    <input id="uv-address" class="url-input" type="text" placeholder="Search Google or type a URL"/>
+    <button class="go-btn" type="submit">Go</button>
+  </form>
 
-  <!-- Iframe to display search results using UV Proxy -->
-  <iframe id="uv-iframe" src="" name="uv-iframe"></iframe>
+  <div id="iframe-container"></div>
 
-  <script src="/ixl/index.js" defer=""></script>
+  <script src="/ixl/index.js" defer></script>
 </body>
 </html>

@@ -7,6 +7,9 @@ const favicon = document.querySelector("link[rel~='icon']");
 let tabs = [];
 let activeTab = null;
 
+// Debounce timer variable
+let debounceTimer;
+
 function createTab(url = "/startpage") {
   const tab = {
     id: Date.now().toString(),
@@ -151,7 +154,16 @@ function startDetectionLoop(tab) {
   tab._detector = setInterval(detect, 2000); // Run every 2 seconds
 }
 
+// Debounce the input and trigger search when typing stops
+address.addEventListener("input", () => {
+  clearTimeout(debounceTimer);
+
+  // Delay the search for 500ms after typing stops
+  debounceTimer = setTimeout(() => {
+    form.dispatchEvent(new Event("submit")); // Trigger the search after 500ms of inactivity
+  }, 500);
+});
+
 window.addEventListener("load", () => {
   createTab(); // Load home page tab
 });
-

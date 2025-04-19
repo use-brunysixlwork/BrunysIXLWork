@@ -1869,6 +1869,21 @@
       "name": "Stickman Hook",
       "url": "/x?url=/assets/games/stickmanhook/",
       "image": "/assets/images/games/stickmanhook.jpg"
+    },
+    {
+      "name": "Gun Mayhem",
+      "url": "/x?url=/assets/html/flash.html?url=/assets/flash/gunmayhem.swf",
+      "image": "/assets/images/games/gunmayhem.jpg"
+    },
+    {
+      "name": "Gun Mayhem 2",
+      "url": "/x?url=/assets/html/flash.html?url=/assets/flash/gunmayhem2.swf",
+      "image": "/assets/images/games/gunmayhem2.jpg"
+    },
+    {
+      "name": "Gun Mayhem Redux",
+      "url": "/x?url=/assets/html/flash.html?url=/assets/flash/gunmayhemredux.swf",
+      "image": "/assets/images/games/gunmayhemredux.jpg"
     }
   ]
 }

@@ -58,6 +58,6 @@ function displayMovies(movies) {
   });
 
   // Clear previous results and add new ones
-  main.innerHTML = `<br><br><br><br><h1>Brunima</h1><p>free movies, at any time</p><input id="search" placeholder="Search for a movie..."><button id="discover">Discover</button>`;
+  main.innerHTML = `<br><br><h1>Brunima</h1><p>free movies, at any time</p><input id="search" placeholder="Search for a movie..."><button id="discover">Discover</button>`;
   main.appendChild(resultsContainer);
 }

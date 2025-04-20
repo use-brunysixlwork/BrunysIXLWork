@@ -15,6 +15,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 
 
 
@@ -245,7 +246,7 @@
 
 .theme-szvy {
     --bg-color: #250307;
-    --font: "Roboto Mono", monospace;
+    --font: "Reddit Sans", sans-serif;
     --text-color: #ffffff;
     --border-color: rgb(242, 88, 161);
     --input-bg: rgba(242, 88, 161, 0.5);

@@ -1889,6 +1889,16 @@
       "name": "Crazy Cattle 3D",
       "url": "/assets/games/cattle3d/",
       "image": "/assets/images/games/crazycattle3d.jpg"
+    },
+    {
+      "name": "Circlo",
+      "url": "/assets/games/circlo/",
+      "image": "/assets/images/games/circlo.jpg"
+    },
+    {
+      "name": "We Become What We Behold",
+      "url": "/assets/games/webecomewhatwebehold/",
+      "image": "/assets/images/games/webecomewhatwebehold.png"
     }
   ]
 }

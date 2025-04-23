@@ -1892,12 +1892,12 @@
     },
     {
       "name": "Circlo",
-      "url": "/assets/games/circlo/",
+      "url": "/x?url=/assets/games/circlo/",
       "image": "/assets/images/games/circlo.jpg"
     },
     {
       "name": "We Become What We Behold",
-      "url": "/assets/games/webecomewhatwebehold/",
+      "url": "/x?url=/assets/games/webecomewhatwebehold/",
       "image": "/assets/images/games/webecomewhatwebehold.png"
     }
   ]

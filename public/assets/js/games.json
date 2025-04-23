@@ -1884,6 +1884,11 @@
       "name": "Gun Mayhem Redux",
       "url": "/x?url=/assets/html/flash.html?url=/assets/flash/gunmayhemredux.swf",
       "image": "/assets/images/games/gunmayhemredux.jpg"
+    },
+    {
+      "name": "Crazy Cattle 3D",
+      "url": "/assets/games/cattle3d/",
+      "image": "/assets/images/games/crazycattle3d.jpg"
     }
   ]
 }

@@ -78,12 +78,15 @@
         "url": "/x?url=/assets/apps/weavesilk/",
         "image": "/assets/images/apps/weavesilk.jpg"
       },
-      
       {
         "name": "Zip Opener",
-        "url": "/x?url=/assets/apps/zipop",
+        "url": "/x?url=/assets/apps/zipopener/",
         "image": "/assets/images/apps/zip.jpg"
+      },
+      {
+        "name": "Web Retro",
+        "url": "/x?url=/assets/apps/webretro/",
+        "image": "/assets/images/apps/webretro.png"
       }
-
     ]
 }

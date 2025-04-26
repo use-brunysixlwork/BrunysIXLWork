@@ -1,80 +1,144 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFZ72L5FPQ"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-          gtag('config', 'G-7FN7LEVWXD');
+        gtag('config', 'G-TFZ72L5FPQ');
         </script>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>EmulatorJS | Seraph</title>
-        <link rel="shortcut icon" href="../../images/ico.ico" type="image/x-icon">
-        <script src="../../storage/js/cloak.js"></script>
-        
+        <title>EmulatorJS</title>
+        <link rel = icon href = docs/favicon.ico sizes = "16x16 32x32 48x48 64x64" type = image/vnd.microsoft.icon>
+        <meta name = viewport content = "width = device-width, initial-scale = 1">
         <style>
-            @font-face {
-                font-family: 'Main';
-                src: url('../../storage/fonts/ubuntu/Ubuntu.woff2') format('woff2'),
-                    url('../../storage/fonts/ubuntu//Ubuntu.woff') format('woff'),
-                    url('../../storage/fonts/ubuntu/Ubuntu.ttf') format('ttf'),
-                    url('../../storage/fonts/ubuntu/Ubuntu.otf') format('otf');
+             body, html {
+                height: 100%;
+                background-color: black;
+                color: white;
             }
 
             body {
                 margin: 0;
-                padding: 0;
-                background-color: black;
-                color: white;
-                background-image: url('emulatorjs.png');
-                background-size: cover;
-                background-repeat: no-repeat;
+                overflow: hidden;
             }
 
-
-            input {
-                background-color: black;
-                color: white;
-                font-family: 'Main', sans-serif;
+            body, #box, #top {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
             }
 
-            button {
-                color: white;
-                font-family: 'Main', sans-serif;
-                background-color: black;
-                border: 2px solid white;
-                border-radius: 16px;
-            }
-
-            .box {
-                font-family: 'Main';
-                text-align: center;
-                padding-top: 20px;
-            }
-
-            h1 {
-                font-size: 48px;
-            }
-
-            p {
+            #box {
+                color: #aaa;
+                height: 20em;
+                width: 30em;
+                max-width: 80%;
+                max-height: 80%;
+                background-color: #333;
+                border-radius: 0.4em;
+                border: 2px solid #555;
+                position: relative;
+                flex-direction: column;
+                transition-duration: 0.2s;
+                overflow: hidden;
+                font-family: monospace;
+                font-weight: bold;
                 font-size: 20px;
+                margin: 5px;
             }
 
+            #box:hover, #box[drag] {
+                border-color: #38f;
+                color: #ddd
+            }
+
+            #input {
+                cursor: pointer;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0
+            }
+
+            #display {
+                width: 100%;
+                height: 100%
+            }
+
+            select, button {
+                padding: 0.6em 0.4em;
+                margin: 0.5em;
+                width: 15em;
+                max-width: 100%;
+                font-family: monospace;
+                font-weight: bold;
+                font-size: 16px;
+                background-color: #444;
+                color: #aaa;
+                border-radius: 0.4em;
+                border: 1px solid #555;
+                cursor: pointer;
+                transition-duration: 0.2s
+            }
+
+            select:hover, button:hover {
+                background-color: #666;
+                color: #ddd
+            }
+
+            .logo {
+                width: 130px;
+                height: 130px;
+                filter: drop-shadow(0 0 10px white);
+            }
+
+            #top {
+                margin: 5px;
+            }
         </style>
     </head>
 
     <body>
-        <div id="box" style="text-align: center; padding-top: 20px;">
-            <h1 style="font-family: 'Main';">emulatorjs upload</h1>
-            <p style="font-family: 'Main';">upload game roms here and run them using emulatorjs!</p>
-            <input type="file" id="input">
+        <div id="top">
+            <h1>EmulatorJS Demo</h1>
+            <img src="docs/Logo-light.png" alt="Logo" class="logo">
+        </div>
+        <div id = box>
+            <input type = file id = input>
+            Drag ROM file or click here
         </div>
 
         <script>
+            let enableDebug = false;
+            let enableThreads = false;
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            if (urlParams.get('debug') == 1) {
+                enableDebug = true;
+                console.log("Debug is enabled");
+            } else {
+                console.log("Debug is disabled");
+            }
+
+            if (urlParams.get('threads') == 1) {
+                if (window.SharedArrayBuffer) {
+                    enableThreads = true;
+                    console.log("Threads are enabled");
+                } else {
+                    console.warn("Threads are disabled as SharedArrayBuffer is not available. Threads requires two headers to be set when sending you html page. See https://stackoverflow.com/a/68630724");
+                    console.log("Threads are disabled");
+                }
+            } else {
+                console.log("Threads are disabled");
+            }
+            
             input.onchange = async () => {
-                const url = new Blob([input.files[0]])
+                const url = input.files[0]
                 const parts = input.files[0].name.split(".")
 
                 const core = await (async (ext) => {
@@ -99,11 +163,14 @@
                     if (["col", "cv"].includes(ext))
                         return "coleco"
 
+                    if (["d64"].includes(ext))
+                        return "vice_x64sc"
+
                     if (["nds", "gba", "gb", "z64", "n64"].includes(ext))
                         return ext
 
                     return await new Promise(resolve => {
-                        const cores = {
+                        var coreValues = {
                             "Nintendo 64": "n64",
                             "Nintendo Game Boy": "gb",
                             "Nintendo Game Boy Advance": "gba",
@@ -122,19 +189,29 @@
                             "Sega Saturn": "segaSaturn",
                             "Atari 7800": "atari7800",
                             "Atari 2600": "atari2600",
+                            "Arcade": "arcade",
                             "NEC TurboGrafx-16/SuperGrafx/PC Engine": "pce",
                             "NEC PC-FX": "pcfx",
                             "SNK NeoGeo Pocket (Color)": "ngp",
                             "Bandai WonderSwan (Color)": "ws",
-                            "ColecoVision": "coleco"
+                            "ColecoVision": "coleco",
+                            "Commodore 64": "vice_x64sc",
+                            "Commodore 128": "vice_x128",
+                            "Commodore VIC20": "vice_xvic",
+                            "Commodore Plus/4": "vice_xplus4",
+                            "Commodore PET": "vice_xpet"
                         }
 
-                        const button = document.createElement("button");
-                        button.classList.add("emu-button");
+                        const cores = Object.keys(coreValues).sort().reduce(
+                            (obj, key) => { 
+                                obj[key] = coreValues[key]; 
+                                return obj;
+                            }, 
+                            {}
+                        );
 
-                        const select = document.createElement("select");
-                        select.classList.add("emu-select");
-
+                        const button = document.createElement("button")
+                        const select = document.createElement("select")
 
                         for (const type in cores) {
                             const option = document.createElement("option")
@@ -160,6 +237,8 @@
                 sub.id = "game"
                 div.id = "display"
 
+                const top = document.getElementById("top");
+                top.remove();
                 box.remove()
                 div.appendChild(sub)
                 document.body.appendChild(div)
@@ -169,22 +248,14 @@
                 window.EJS_biosUrl = "";
                 window.EJS_gameUrl = url;
                 window.EJS_core = core;
-                window.EJS_pathtodata = "../../storage/emulatorjs/data";
+                window.EJS_pathtodata = "data/";
                 window.EJS_startOnLoaded = true;
+                window.EJS_DEBUG_XX = enableDebug;
+                window.EJS_disableDatabases = true;
+                window.EJS_threads = enableThreads;
 
-                script.src = "../../storage/emulatorjs/data/loader.js";
+                script.src = "data/loader.js";
                 document.body.appendChild(script);
-            }
-            function detectAdBlock(url) {
-                let adBlockEnabled = false;
-                try {
-                    window.EJS_AdUrl = document.querySelector('iframe[src="' + window.EJS_AdUrl + '"]').src;
-                } catch (e) {
-                    adBlockEnabled = true;
-                }
-                if (adBlockEnabled) {
-                    window.EJS_adBlocked(url);
-                }
             }
             box.ondragover = () => box.setAttribute("drag", true);
             box.ondragleave = () => box.removeAttribute("drag");

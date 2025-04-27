@@ -1914,6 +1914,11 @@
       "name": "Gravity Run",
       "url": "/x?url=/assets/games/gravityrun/",
       "image": "/assets/images/games/gravityrun.jpg"
+    },
+    {
+      "name": "HTML 5b",
+      "url": "/x?url=/assets/games/html5b/",
+      "image": "/assets/images/games/html5b.jpg"
     }
   ]
 }

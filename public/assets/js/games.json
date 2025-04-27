@@ -1904,6 +1904,16 @@
       "name": "Pou",
       "url": "/assets/games/pou/",
       "image": "/assets/images/games/pou.png"
+    },
+    {
+      "name": "Donte",
+      "url": "/x?url=/assets/games/donte/",
+      "image": "/assets/images/games/donte.png"
+    },
+    {
+      "name": "Gravity Run",
+      "url": "/x?url=/assets/games/gravityrun/",
+      "image": "/assets/images/games/gravityrun.jpg"
     }
   ]
 }

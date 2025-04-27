@@ -87,6 +87,11 @@
         "name": "Web Retro",
         "url": "/x?url=/assets/apps/webretro/",
         "image": "/assets/images/apps/webretro.png"
+      },
+      {
+        "name": "Auk: Code Editor",
+        "url": "/x?url=/assets/apps/auk/",
+        "image": "/assets/images/apps/auk.png"
       }
     ]
 }

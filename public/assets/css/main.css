@@ -19,6 +19,28 @@ body {
 	overflow-x: hidden;
 }
 
+.flowing-text {
+	color: var(--text-color);
+	font-size: 3rem;
+	text-align: center;
+	animation: flowing 3s infinite ease-in-out;
+}
+  
+@keyframes flowing {
+	0% {
+	  letter-spacing: normal;
+	  transform: scale(1);
+}
+50% {
+	  letter-spacing: 5px;
+	  transform: scale(1.05);
+}
+100% {
+	letter-spacing: normal;
+	transform: scale(1);
+}
+}
+
 .banner {
 	width: 100%;
 	height: calc(100vh - -100px);

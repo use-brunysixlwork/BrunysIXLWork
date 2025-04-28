@@ -19,27 +19,34 @@ body {
 	overflow-x: hidden;
 }
 
-.flowing-text {
+.glowing-text {
 	color: var(--text-color);
 	font-size: 3rem;
 	text-align: center;
-	animation: flowing 3s infinite ease-in-out;
-}
+	text-shadow: 
+	  0 0 5px var(--text-color), 
+	  0 0 10px var(--text-color), 
+	  0 0 20px var(--text-color), 
+	  0 0 40px var(--text-color);
+	animation: glow 2s infinite alternate;
+  }
   
-@keyframes flowing {
-	0% {
-	  letter-spacing: normal;
-	  transform: scale(1);
-}
-50% {
-	  letter-spacing: 5px;
-	  transform: scale(1.05);
-}
-100% {
-	letter-spacing: normal;
-	transform: scale(1);
-}
-}
+  @keyframes glow {
+	from {
+	  text-shadow: 
+		0 0 5px var(--text-color), 
+		0 0 10px var(--text-color), 
+		0 0 20px var(--text-color), 
+		0 0 40px var(--text-color);
+	}
+	to {
+	  text-shadow: 
+		0 0 10px var(--text-color), 
+		0 0 20px var(--text-color), 
+		0 0 30px var(--text-color), 
+		0 0 50px var(--text-color);
+	}
+  }
 
 .banner {
 	width: 100%;

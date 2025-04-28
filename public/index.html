@@ -52,7 +52,27 @@
   <pre id="uv-error-code"></pre>
   </div>
 
-<script>
+  <script>
+    const messages = [
+    "Sw Shucks",
+    "Version 0.1!"
+];
+
+
+function changeText() {
+    let p = document.getElementById("dynamic-text");
+    p.style.opacity = "0"; 
+    setTimeout(() => {
+        p.textContent = messages[Math.floor(Math.random() * messages.length)];
+        p.style.opacity = "1"; 
+    }, 200);
+}
+
+
+changeText();
+</script>
+
+<!-- <script>
     const messages = [
     "Also try 60%glasses!",
     "best for unblocked games and proxy",
@@ -110,7 +130,7 @@ function changeText() {
 
 
 changeText();
-</script>
+</script> -->
 
 
 <br>

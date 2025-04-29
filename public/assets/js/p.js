@@ -2,7 +2,7 @@ const PARTICLES_ID = "particles-js";
 const PARTICLES_STORAGE_KEY = "particlesEnabled";
 const THEME_STORAGE_KEY = "selected-theme";
 const PARTICLE_COLORS = {
-  default: "#004aad",
+  default: "#ffffff",
   "theme-light": "#0d0d0d",
   "theme-blue": "#7FDBFF",
   "theme-hacker": "#00ff44",
@@ -23,7 +23,7 @@ const PARTICLE_COLORS = {
   "theme-jimmy": "#300410"
 };
 
-const loadParticles = (color = "#004aad") => {
+const loadParticles = (color = "#ffffff") => {
   if (!document.getElementById(PARTICLES_ID)) {
     const div = document.createElement("div");
     div.id = PARTICLES_ID;

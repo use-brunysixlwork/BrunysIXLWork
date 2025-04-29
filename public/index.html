@@ -38,6 +38,26 @@
       </div>
   </nav>
 
+  
+<div id="popup" class="popup" style="display: none;">
+  <div class="popup-content">
+    <p>BrunysIXLWork is no longer being worked on and another project is being worked on. This is cause of 1 to 2 reasons. 1st my school admins hate me now lol and secondly everything here is done. See you next school year!</p>
+    <button id="okButton">OK</button>
+  </div>
+</div>
+
+<script>
+ 
+  if (!localStorage.getItem('popupShown')) {
+    document.getElementById('popup').style.display = 'flex';
+  }
+
+  document.getElementById('okButton').addEventListener('click', function() {
+    localStorage.setItem('popupShown', 'true'); 
+    document.getElementById('popup').style.display = 'none'; 
+  });
+</script>
+
 <section class="banner">
 <h1 style="font-size: 2.5rem; margin: 0;">BrunysIXLWork</h1>
 <p id="dynamic-text" onclick="changeText()"></p>
